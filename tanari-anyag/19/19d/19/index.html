@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container p-2">
+
+        <!--onchange esemény: input mező megváltoztatása és kikattintás után függvény futtatás-->
+        <label class="form-label">Hitelösszeg (Ft)</label>
+        <input onchange="calculate()" id="inp_hitelosszeg" type="number" class="form-control" value="30000000" />
+
+        <label class="form-label mt-2">Futamidő (hó)</label>
+        <input onchange="calculate()" id="inp_ho" type="number" class="form-control" value="240" />
+
+        <label class="form-label mt-2">Éves kamatláb (pl. 3%)</label>
+        <input onchange="calculate()" id="inp_kamat" type="number" class="form-control" value="3" />
+
+        <!--onclick esemény: gombra kattintás és hatására függvény futtatás-->
+        <button class="btn btn-primary mt-2" onclick="calculate()">Hitelkalkulácio</button>
+
+        <div id="result">
+            <table class="table table-bordered mt-3">
+                <tbody>
+                    <tr>
+                        <td>Havi törlesztőrészlet</td>
+                        <td id="res_havi"></td>
+                    </tr>
+                    <tr>
+                        <td>Teljes visszafizetendő összeg</td>
+                        <td id="res_teljes"></td>
+                    </tr>
+                    <tr>
+                        <td>Bank nyeresége (kamat)</td>
+                        <td id="res_kamat"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        //a script blokkba írt függvényhívás konkrétan az oldal betöltődése után
+        //rögtön lefuttatja az adott függvényt
+        calculate();
+
+        function forintFormatter(num){
+            // num értéke pl: 39930960
+            // amit szeretnénk pl: 39.930.960
+            //ez egy AI által írt függvény - nem kell érteni/tudni/stb.
+            if (num === null || num === undefined) return '';
+
+            const n = Math.trunc(Number(num));
+            if (!Number.isFinite(n)) return '';
+
+            const sign = n < 0 ? '-' : '';
+            const text = Math.abs(n).toString();
+            return sign + text.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+
+        function calculate() {
+            //hitelösszeg
+            let p = parseInt(document.getElementById('inp_hitelosszeg').value);
+
+            //hónapok száma
+            let n = parseInt(document.getElementById('inp_ho').value);
+
+            //kamatláb
+            let rr = parseFloat(document.getElementById('inp_kamat').value); //pl: 3
+            let r = rr/100/12; //pl: 0.0025
+
+            let torleszto = p * ((r*(1+r)**n)/((1+r)**n-1));
+
+            document.getElementById('res_havi').innerText =
+             forintFormatter(Math.round(torleszto)) + ' Ft';
+
+            document.getElementById('res_teljes').innerText =
+             forintFormatter(Math.round(torleszto) * n) + ' Ft';
+
+            document.getElementById('res_kamat').innerText =
+             forintFormatter((Math.round(torleszto) * n) - p) + ' Ft'; 
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+// MIRE JÓ:   az "akcio" stílus SCSS-ben, a színt a _colors.scss változójából veszi.
+// ÁTÍRNI:    a változó neve, a tulajdonságok.
+@use '../../colors';           // a _colors.scss fájlhoz vezető út ettől a fájltól számítva: ../../ = két szinttel feljebb (src/app/_colors.scss)
+                               // az aláhúzás és a .scss kimarad. Ha a komponens közvetlenül az app/ alatt van: '../colors'
+
+.akcio {
+  font-weight: bold;           // félkövér
+  font-size: 1.4rem;           // nagyobb betűméret
+  color: colors.$kiemeles;     // colors. + a változó neve
+}

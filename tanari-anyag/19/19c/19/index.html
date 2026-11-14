@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container p-2">
+
+        <label class="form-label">Hitelösszeg (Ft)</label>
+        <input id="inp_hitelosszeg" type="number" class="form-control" value="30000000" />
+
+        <label class="form-label mt-2">Futamidő (év)</label>
+        <input id="inp_ev" type="number" class="form-control" value="20" />
+
+        <label class="form-label mt-2">Kamatláb (pl. 3%)</label>
+        <input id="inp_kamat" type="number" class="form-control" value="3" />
+
+        <button class="btn btn-primary mt-2" onclick="calculate()">Hitelkalkulácio</button>
+
+        <div id="result">
+        </div>
+
+    </div>
+
+
+    <script>
+        function calculate() {
+            //hitelösszeg
+            let p = parseInt(document.getElementById('inp_hitelosszeg').value);
+
+            //évek száma
+            let n = parseInt(document.getElementById('inp_ev').value);
+
+            //kamatláb
+            let rr = parseInt(document.getElementById('inp_kamat').value); //pl: 3
+            let r = rr/100; //pl: 0.03
+
+            let torleszto = p * ((r*(1+r)**n)/(((1+r)**n)-1));
+
+            document.getElementById('result').innerHTML = 
+            `<h1>Havi törlesztőrészlet: ${Math.round(torleszto/12)} Ft</h1>`;
+            
+        }
+    </script>
+</body>
+
+</html>

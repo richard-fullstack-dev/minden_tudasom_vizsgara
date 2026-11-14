@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulzáró feladat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-success sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Póló webshop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ren">Rendelés leadása</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#art">Ártáblázat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gal">Galéria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nyer">Nyereményjáték</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-md mt-4">
+        <form>
+            <div class="row" id="ren">
+                <div class="col-md-6">
+                    <label class="form-label">Név</label>
+                    <input type="text" class="form-control" />
+
+                    <label class="form-label mt-2">Város</label>
+                    <select class="form-select">
+                        <option>Budapest</option>
+                        <option>Szeged</option>
+                        <option>Debrecen</option>
+                    </select>
+
+                    <label class="form-label mt-2">Kiszállítás módja</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Foxpost
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Futár
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                            checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Személyes átvétel üzletünkben
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Pólószín</label>
+                    <input type="color" class="form-control form-control-color" />
+
+                    <label class="form-label mt-2">Pólóméret</label>
+                    <select class="form-select">
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+                        <option>XXL</option>
+                    </select>
+
+                    <label class="form-label mt-2">Megjegyzés</label>
+                    <textarea class="form-control"></textarea>
+                </div>
+            </div>
+        </form>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <button style="width: 100%;" class="btn btn-success mt-3">Rendelés leadása</button>
+            </div>
+        </div>
+
+        <div class="row mt-5 justify-content-center" id="art">
+            <div class="col-md-8">
+                <table class="table table-striped table-bordered text-center">
+                    <thead>
+                        <tr class="table-success">
+                            <th>Méret</th>
+                            <th>Ár</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>S</td>
+                            <td>500 Ft</td>
+                        </tr>
+                        <tr>
+                            <td>M</td>
+                            <td>600 Ft</td>
+                        </tr>
+                        <tr>
+                            <td>L</td>
+                            <td>700 Ft</td>
+                        </tr>
+                        <tr>
+                            <td>XL</td>
+                            <td>800 Ft</td>
+                        </tr>
+                        <tr>
+                            <td>XXL</td>
+                            <td>1000 Ft</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row mt-5" id="gal">
+            <div class="col-md-4 mb-4 text-center">
+                <img src="images/01.webp" class="img-fluid img-thumbnail" />
+            </div>
+            <div class="col-md-4 mb-4 text-center">
+                <img src="images/02.webp" class="img-fluid img-thumbnail" />
+            </div>
+            <div class="col-md-4 mb-4 text-center">
+                <img src="images/03.webp" class="img-fluid img-thumbnail" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4 text-center">
+                <img src="images/04.webp" class="img-fluid img-thumbnail" />
+            </div>
+            <div class="col-md-4 mb-4 text-center">
+                <img src="images/05.webp" class="img-fluid img-thumbnail" />
+            </div>
+            <div class="col-md-4 mb-4 text-center">
+                <img src="images/06.webp" class="img-fluid img-thumbnail" />
+            </div>
+        </div>
+
+        <div class="row" id="nyer">
+            <div class="game">
+                <button>?</button>
+                <button>?</button>
+                <button>?</button>
+                <button>?</button>
+                <button>?</button>
+            </div>
+        </div>
+        
+    </div>
+</body>
+
+</html>

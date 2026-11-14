@@ -1,0 +1,3 @@
+<!-- [item]="p"  = adat a gyereknek;   (message)="onMessage($event)" = esemény a gyerektől -->
+<p>Utolsó kattintás: {{ last }}</p>
+<app-gyerek *ngFor="let p of service.products" [item]="p" (message)="onMessage($event)"></app-gyerek>

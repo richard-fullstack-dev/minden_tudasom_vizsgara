@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Töltsd ki az adataidat!</h3>
+
+    <form>
+        <fieldset>
+            <legend>Személyes adatok</legend>
+            Név előtag:
+            <input list="elotag" autofocus>
+            <datalist id="elotag">
+                <option value="id.">
+                <option value="ifj.">
+                <option value="Dr.">
+                <option value="Prof.">
+            </datalist>
+            <br/>
+
+
+            Vezetéknév:
+            <input type="text" size="40" />
+            <br />
+
+            Keresztnév:
+            <input type="text" size="40" />
+            <br />
+
+            Életkor:
+            <input type="number" required />
+            <br />
+
+            Pólóméret: <br />
+            <input type="radio" name="tshirt" value="s" checked />S <br />
+            <input type="radio" name="tshirt" value="m" />M <br />
+            <input type="radio" name="tshirt" value="l" />L <br />
+            <input type="radio" name="tshirt" value="xl" />XL <br />
+
+            Pólószín: <br/>
+            <input type="color" />
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Étkezési adatok</legend>
+            Jelöld be melyik étkezést kéred! <br />
+            <input type="checkbox" name="food" value="sr" disabled />Szerda reggeli <br />
+            <input type="checkbox" name="food" value="sv" />Szerda vacsora <br />
+            <input type="checkbox" name="food" value="cr" />Csütörtök reggeli <br />
+            <input type="checkbox" name="food" value="cv" />Csütörtök vacsora <br />
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Szoba adatok</legend>
+            Érkezés ideje: <br/>
+            <input type="time" />
+            <br/>
+            Szobatípus: <br/>
+            <select>
+                <option>Egyágyas szoba</option>
+                <option>Kétágyas szoba</option>
+                <option>Apartman szoba (2+2 ágyas)</option>
+            </select>
+            <br/>
+            Horkolás mértéke:
+            <br/>
+            1<input type="range" min="1" max="5" />5
+        </fieldset>
+
+        <fieldset>
+            <legend>Egyebek</legend>
+            Megjegyzés: <br/>
+            <textarea rows="5" cols="60"></textarea>
+        </fieldset>
+
+        <fieldset>
+            <legend>Beküldés</legend>
+            <input type="submit" value="Regisztráció" />
+            <input type="reset" value="Űrlap törlése" />
+        </fieldset>
+
+    </form>
+
+</body>
+
+</html>

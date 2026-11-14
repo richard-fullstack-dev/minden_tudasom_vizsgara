@@ -1,0 +1,6 @@
+<!-- MIRE JÓ:  megjelenítés: név h3-ban, ár bekezdésben; ha akcio igaz, az "akcio" class rákerül az árra.
+     HASZNÁLAT (más komponens html-jében):
+       <app-termekajanlo nev="Espresso" [ar]="700"></app-termekajanlo>              <- szöveg: szögletes zárójel nélkül
+       <app-termekajanlo nev="Latte" [ar]="900" [akcio]="true"></app-termekajanlo>   <- szám/igaz-hamis: [ ] kell -->
+<h3>{{ nev }}</h3>
+<p [class.akcio]="akcio">{{ ar }} Ft</p>

@@ -1,0 +1,7 @@
+@use '../colors';            // a _colors.scss útja ettől a fájltól számítva (itt: src/app/_colors.scss)
+
+.akcio {
+  font-weight: bold;         // félkövér
+  font-size: 1.4rem;         // az alapértelmezettnél nagyobb
+  color: colors.$kiemeles;   // a _colors.scss kiemeles változója
+}

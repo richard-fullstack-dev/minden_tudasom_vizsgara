@@ -1,0 +1,25 @@
+<!-- MIRE JÓ:  táblázat a service listájából, keresővel, törlés és szerkesztés gombbal.
+     ÁTÍRNI:   az oszlopok és a {{ p.valami }} mezők. -->
+<h4>Termékek</h4>
+
+<input class="form-control mb-2" [(ngModel)]="search" placeholder="Keresés..." type="text">
+
+<div class="alert alert-info" *ngIf="service.products.length === 0">Nincs adat.</div>
+
+<table class="table table-striped" *ngIf="service.products.length > 0">
+  <thead>
+    <tr><th>#</th><th>Név</th><th>Ár</th><th>Akció</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of filtered; index as i">
+      <td>{{ i + 1 }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.price | currency: 'HUF':'symbol':'1.0-0':'hu-HU' }}</td>
+      <td>{{ p.akcio ? 'igen' : 'nem' }}</td>
+      <td>
+        <button class="btn btn-sm btn-warning me-1" routerLink="/edit/{{ p.id }}">Szerkeszt</button>
+        <button class="btn btn-sm btn-danger" (click)="service.delete(p)">Töröl</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,30 @@
+1. Folytatás ng g s auth --skip-tests
+2. ng g class login-model itt loginmodel.ts username és password
+3. auth.service.ts constructor private http Clinet meg privat router
+4. auth.service.ts login() és logout() kérni egy api hivást a login api végpontra
+5. a 2. lépésben létrehozott login(loginModel: loginModel) itt this.http.post kérés
+this.http.post<egyenlőre any> többi az aut.service.ts-ben
+most bejelentkezési comp:  ng g c login --skip-tests és navba+path+login.html inputok ngmodellel
+login.ts loginmodelt csinálni loginmodel:LoginModel = new LoginModel() + button
+ide constructor public authService: authService + login-html button click
+a click-re authservice login gombját rárakni és átadni login model vagyis:
+(click)="authService.login(loginModel) + login.html inputra loginModel.username + password
+F12 tesztelve user + pass button katt
+most //localstorage.setItem("auth-token", response.token)
+a 
+
+6.lépés any tipustalan ezért ng g c token-model --skip-tests
+token-model.ts-ben toke: string = " " és az any átirni tokenmodellre vagyis:
+login(loginModel: LoginModel): void this.http.post<TokenModel>
+ezután this.saveToken(response.token) és lejebb savetoken esemény
+most koncentrálni logout ehhez külön removeToken(){}
+a logout valójában törli a tokent és ennyi
+logout(): void {this.removeToken()} + removeToken az auth.service fájlban
+most login kész és ha már belépve akkor login gomb helyett logout látszódjon
+navba login alá logout és mutasson routerlinkkel logoutra if-egyenlőre
+nav.ts része még üres ide constructor public authService
+most auth.service.ts isLoggedIn(): boolean{} 
+a nav-ban a loginra egy ngIf ami "!authService.isLoggedIn()"
+a nav-ban Logoutra ugyanez !-nélkül
+kell egy click a logoutra (click)="authService.logout()"
+ezt persze rárakhatom a create meg delete-re is hogy csak loginnal lehessen

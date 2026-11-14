@@ -1,0 +1,3 @@
+// MIRE JÓ:   partial fájl: közös változók külön fájlban (az aláhúzás miatt nem lesz belőle önálló css).
+// BETÖLTÉS:  másik scss fájlban:  @use 'colors';   és használat:  colors.$kiemeles
+$kiemeles: #b5651d;

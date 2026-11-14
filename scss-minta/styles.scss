@@ -1,0 +1,66 @@
+// MIRE JÓ:   SCSS: változó, mixin (újrahasznosítható szabálycsomag), @extend (átvesz egy másik osztályt).
+// MIKOR:     "SCSS változó", "mixin", "az osztály terjessze ki...".
+// FORDÍTÁS:  npx sass styles.scss styles.css   (Angularban a fordítást az ng serve elvégzi)
+// ÁTÍRNI:    a változók értékei, az osztálynevek.
+$alap-szin: #6f4e37;
+$kiemelt-szin: #d9534f;
+$hatter: #f5efe6;
+$padding: 12px;
+
+// mixin: névvel ellátott szabálycsomag, paraméterrel (alapértékkel is)
+@mixin lekerekit($sugar: 6px) {
+    border-radius: $sugar;
+    margin: 5px;
+}
+
+@mixin arnyek() {
+    box-shadow: 5px 5px 22px -8px rgba(122, 116, 122, 1);
+}
+
+// ---------------------------------------------------------------------------------------------
+// CLASS DEFINIÁLÁSA (vizsgafeladat-szöveg: "félkövér", "az alapértelmezettnél nagyobb betűméretű",
+// "a betűszín a _colors.scss fájlban definiált kiemeles változó legyen", "része a kimeneti CSS fájlnak")
+// MIKOR:    "készítsen egy SCSS fájlt, amelyben definiálja az akcio class-t".
+// ÁTÍRNI:   a class neve (.akcio), a változó neve ($kiemeles), a méret.
+// A _colors.scss-t be kell tölteni:  @use 'colors';   és így használni:  colors.$kiemeles
+// (ebben a fájlban nincs @use, ezért a mintában a saját $kiemelt-szin változót használjuk)
+// ---------------------------------------------------------------------------------------------
+.akcio {
+    font-weight: bold;              // félkövér
+    font-size: 1.4rem;              // az alapértelmezettnél nagyobb (az alap 1rem = 16px)
+    color: $kiemelt-szin;           // a betűszín változóból (Angularban: colors.$kiemeles)
+}
+// "része a kimeneti CSS fájlnak": az scss-ből fordított styles.css-ben megjelenik a .akcio szabály.
+// Angularban a komponens scss-ébe írva az ng build/ng serve elvégzi a fordítást.
+
+body {
+    background-color: $hatter;
+    color: $alap-szin;
+    padding: $padding;
+}
+
+.kartya {
+    @include lekerekit(10px);       // mixin használata
+    @include arnyek();
+    background-color: white;
+    border: 2px solid $alap-szin;
+    padding: $padding;
+}
+
+.kartya-akcios {
+    @extend .kartya;                // átveszi a .kartya szabályait
+    border-color: $kiemelt-szin;
+}
+
+.gomb {
+    background-color: $alap-szin;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    @include lekerekit();           // alapértelmezett sugárral
+}
+
+.gomb-veszely {
+    @extend .gomb;
+    background-color: $kiemelt-szin;
+}

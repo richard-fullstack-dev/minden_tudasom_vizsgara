@@ -1,0 +1,49 @@
+<div class="custom-overlay alert alert-warning" role="alert" *ngIf="devId !== ''">
+    DEVELOPER ID:
+    <br>
+    {{ devId }}
+</div>
+
+<app-stats></app-stats>
+
+<h4>List developers</h4>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Id</th>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Job</th>
+            <th>Age</th>
+            <th>Salary</th>
+            <th>Skills</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dev of service.developers; index as i" class="align-middle">
+            <td>
+                <span class="badge rounded-pill ms-2" [ngClass]="dev.salary! > getAvgSalaryFromService ? 'bg-success' : 'bg-danger'">
+                    {{ i+1 }}
+                </span>
+            </td>
+            <td (click)="alertId(dev)" class="ps-3">{{ dev.getShortId() }}</td>
+            <td><img src="{{dev.image}}" alt="profile_img" height="40" class="rounded-circle"></td>
+            <td>{{ dev.name }}</td>
+            <td><a href="mailto:{{dev.email}}">{{ dev.email }}</a></td>
+            <td>{{ dev.job }}</td>
+            <td>{{ dev.age }}</td>
+            <td>{{ dev.getFormattedSalary() }}</td>
+            <td>
+                ({{ dev.skills.length }})
+                {{ dev.getSkillsFormatted() }}
+            </td>
+            <td>
+                <a routerLink="/edit2/{{dev.id}}">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

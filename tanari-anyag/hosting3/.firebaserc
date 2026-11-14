@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "webler-project": {
+      "hosting": {
+        "problem-app": [
+          "webler-project"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "webler-project"
+  }
+}

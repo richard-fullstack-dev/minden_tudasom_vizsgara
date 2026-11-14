@@ -1,0 +1,19 @@
+@keyframes anim{
+    0% {width: 20%; background-color: white;}
+    100% {width: 90%; background-color: blanchedalmond;}
+}
+
+label, input{
+    display: block;
+    margin: 5px;
+}
+
+input[type="text"], input[type="number"]{
+    width: 20%;
+    animation-name: anim;
+    animation-duration: 3s;
+    background-color: white;
+    padding: 5px;
+    animation-fill-mode: forwards;
+}
+

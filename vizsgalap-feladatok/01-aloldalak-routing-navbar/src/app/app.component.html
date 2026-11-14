@@ -1,0 +1,11 @@
+<!-- vízszintes navigációs sáv (Bootstrap), a linkek szövege pontosan: Főoldal, Sci-Fi, Humor -->
+<nav class="navbar navbar-expand bg-body-tertiary px-3">
+  <a class="navbar-brand" routerLink="/">Antikvárium</a>
+  <a class="nav-link" routerLink="/">Főoldal</a>
+  <a class="nav-link" routerLink="/scifi">Sci-Fi</a>
+  <a class="nav-link" routerLink="/humor">Humor</a>
+</nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>   <!-- ide töltődik be az aktuális aloldal -->
+</div>

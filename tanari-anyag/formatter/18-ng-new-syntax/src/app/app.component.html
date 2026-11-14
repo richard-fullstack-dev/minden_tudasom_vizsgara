@@ -1,0 +1,41 @@
+<app-demo-if></app-demo-if>
+<hr>
+<app-demo-for></app-demo-for>
+<hr>
+<app-demo-switch></app-demo-switch>
+<hr>
+
+<h2>defer</h2>
+
+<!-- Az Angular dokumentáció szerint a @defer célja, hogy a nem azonnal szükséges kódot késleltetve töltse be, ezzel csökkentve a kezdeti bundle méretét és javítva például az LCP/TTFB mutatókat. -->
+<!-- https://angular.dev/guide/templates/defer?utm_source=chatgpt.com -->
+
+
+<!-- @defer { -->
+@defer (on interaction) {
+	<app-demo-diagram></app-demo-diagram>
+} @placeholder {
+	<button>Kattints a diagram betöltéshez...</button>
+}
+
+<!-- @loading (after 0ms; minimum 3s) {
+	<p>Betöltés...</p>
+} @error {
+	<p>Nem sikerült betölteni a komponenst.</p>
+} -->
+
+<!-- Teljesen klasszikus, standalone=false, NgModule-alapú komponensekkel
+nem igazán lehet jól demonstrálni a @defer @loading és @error részeit,
+mert azok akkor érdekesek, ha Angular valóban külön lazy chunkként
+tölti be a deferelt dependency-t.
+Ehhez standalone-ként kéne az alkalmazást inicializálni.
+-->
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

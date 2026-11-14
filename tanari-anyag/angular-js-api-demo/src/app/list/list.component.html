@@ -1,0 +1,41 @@
+<div class="custom-overlay alert alert-warning" role="alert" *ngIf="devId !== ''">
+    DEVELOPER ID:
+    <br>
+    {{ devId }}
+</div>
+
+<app-stats></app-stats>
+
+<h4>List developers</h4>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Job</th>
+            <th>Age</th>
+            <th>Salary</th>
+            <th>Skills</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dev of service.developers; index as i">
+        
+            <td (click)="alertId(dev)" class="ps-3">{{ dev.getShortId() }}</td>
+            <td>{{ dev.name }}</td>
+            <td>{{ dev.job }}</td>
+            <td>{{ dev.age }}</td>
+            <td>{{ dev.getFormattedSalary() }}</td>
+            <td>
+                ({{ dev.skills.length }})
+                {{ dev.getSkillsFormatted() }}
+            </td>
+            <td>
+                <a routerLink="/edit2/{{dev.id}}">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

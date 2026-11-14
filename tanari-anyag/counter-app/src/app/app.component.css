@@ -1,0 +1,12 @@
+.content {
+    margin: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: red;
+}
+
+svg {
+    width: 150px;
+}

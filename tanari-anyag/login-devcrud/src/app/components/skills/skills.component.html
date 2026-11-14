@@ -1,0 +1,62 @@
+<h4>Skills</h4>
+
+<button class="btn btn-success mb-5 mt-3" data-bs-toggle="modal" data-bs-target="#skillCreateModal">
+    Create skill
+</button>
+
+<div style="clear: both;"></div>
+
+<app-skill-card
+    *ngFor="let skill of skillService.skills"
+    [skill]="skill"
+></app-skill-card>
+
+
+<div style="clear: both;"></div>
+
+<!-- Skill editing modal window -->
+<div class="modal fade" id="skillEditModal" tabindex="-1" aria-labelledby="skillEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="skillEditModalLabel">Edit skill</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control mb-2" disabled [(ngModel)]="skillService.skillToEdit.id">
+                <input type="text" class="form-control mb-2" placeholder="Name" [(ngModel)]="skillService.skillToEdit.name">
+                <textarea class="form-control mb2" placeholder="Description" [(ngModel)]="skillService.skillToEdit.description"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="skillService.update()">
+                    <i class="bi bi-exclamation-circle-fill me-2"></i>
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Skill creation modal window -->
+<div class="modal fade" id="skillCreateModal" tabindex="-1" aria-labelledby="skillCreateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="skillCreateModalLabel">Create skill</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control mb-2" placeholder="Name" [(ngModel)]="skillService.skillToCreate.name">
+                <textarea class="form-control mb2" placeholder="Description" [(ngModel)]="skillService.skillToCreate.description"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="skillService.create()">
+                    <i class="bi bi-plus-circle-fill"></i>
+                    Create skill
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

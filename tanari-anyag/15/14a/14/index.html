@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="padding: 50px;">
+    <input type="number" id="inp" />
+    <button onclick="calculate()">Kiszámol</button>
+    <h3 id="h"></h3>
+
+    <script>
+        function calculate(){
+            let age = document.getElementById('inp').value;
+            let result = age - 1;
+            document.getElementById('h').innerText = 'Egyel kevesebb: ' + result;
+        }
+    </script>
+</body>
+</html>

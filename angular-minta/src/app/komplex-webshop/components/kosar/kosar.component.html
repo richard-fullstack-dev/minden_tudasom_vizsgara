@@ -1,0 +1,20 @@
+<h4>Kosár</h4>
+
+<div class="alert alert-info" *ngIf="kosarService.tetelek.length === 0">A kosár üres.</div>
+
+<table class="table" *ngIf="kosarService.tetelek.length > 0">
+  <thead><tr><th>Termék</th><th>Db</th><th>Összeg</th><th></th></tr></thead>
+  <tbody>
+    <tr *ngFor="let t of kosarService.tetelek">
+      <td>{{ t.termek.nev }}</td>
+      <td>{{ t.db }}</td>
+      <td>{{ t.osszeg | currency: 'HUF':'symbol':'1.0-0':'hu-HU' }}</td>
+      <td><button class="btn btn-sm btn-danger" (click)="kosarService.torol(t)">Töröl</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="kosarService.tetelek.length > 0">
+  <strong>Végösszeg:</strong> {{ kosarService.vegosszeg | currency: 'HUF':'symbol':'1.0-0':'hu-HU' }}
+  <button class="btn btn-sm btn-outline-danger ms-3" (click)="kosarService.uriti()">Kosár ürítése</button>
+</p>

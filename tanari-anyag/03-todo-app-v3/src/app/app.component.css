@@ -1,0 +1,17 @@
+.content {
+    margin: 0 auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+svg {
+    width: 150px;
+}
+
+.done-icon::after {
+    content: " ✅";
+}
+
+.border-priority {
+    border-left: 8px solid rgb(246, 106, 106);
+}

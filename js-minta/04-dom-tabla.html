@@ -1,0 +1,36 @@
+<!-- MIRE JÓ:   sima JavaScript (framework nélkül): űrlap -> lista -> táblázat kiírása, törléssel.
+     MIKOR:     "weboldalon belül JavaScripttel", "gombra kerüljön be a táblázatba".
+     ÁTÍRNI:    az osztály és a mezők, az input id-k. FONTOS: minden módosítás után display() újra! -->
+<input id="inp_name" type="text" placeholder="Név">
+<button onclick="add()">Hozzáad</button>
+<table><tbody id="tbody"></tbody></table>
+
+<script>
+    class Person {
+        constructor(name) { this.name = name }
+    }
+
+    let persons = []
+    persons.push(new Person("Endre"))
+    display()
+
+    function add() {
+        let name = document.getElementById("inp_name").value     // beolvasás (mindig szöveg)
+        persons.push(new Person(name))
+        display()                                                  // mindig újra kiírjuk!
+    }
+
+    function display() {
+        document.getElementById("tbody").innerHTML = ''            // előbb törlés, különben duplázódik
+        persons.forEach(x => {
+            document.getElementById("tbody").innerHTML +=          // += hozzáfűz
+                `<tr><td>${x.name}</td><td><button onclick="remove('${x.name}')">Töröl</button></td></tr>`
+        })
+    }
+
+    // az onclick-ben a név idézőjelben ('${x.name}') kell, különben változónak veszi
+    function remove(name) {
+        persons = persons.filter(x => x.name !== name)
+        display()
+    }
+</script>

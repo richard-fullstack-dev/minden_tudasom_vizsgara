@@ -1,0 +1,13 @@
+<!-- MIRE JÓ:  az űrlap mezői [(ngModel)]-mel a változókhoz kötve; a gomb az add()-ot hívja; alatta a lista a toString() értékeivel.
+     FONTOS:   FormsModule kell az app.module.ts-ben. -->
+<h4>Új könyv</h4>
+
+<input class="form-control mb-2" [(ngModel)]="cim" placeholder="Cím..." type="text">
+<input class="form-control mb-2" [(ngModel)]="isbn" placeholder="ISBN (10 vagy 13 számjegy)..." type="text">
+<button class="btn btn-success" (click)="add()">Hozzáad</button>
+
+<div class="alert alert-danger mt-2" *ngIf="hiba !== ''">{{ hiba }}</div>
+
+<ul class="mt-3">
+  <li *ngFor="let k of konyvek">{{ k.toString() }}</li>
+</ul>

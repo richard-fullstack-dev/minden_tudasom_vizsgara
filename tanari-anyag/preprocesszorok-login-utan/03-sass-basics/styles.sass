@@ -1,0 +1,55 @@
+// változók deklarációja
+$primary-color: rgb(40, 170, 226)
+$bg-color: rgb(244, 227, 143)
+$secondary-color: rgb(211, 211, 211)
+$padding-top: 13px
+$padding-left: 5px
+$padding-right: 5px
+$padding-bottom: 10px
+
+// mixin-ek használata
+=rounded-corners($radius: 5px)
+    border-radius: $radius
+    margin: 5px
+
+=border-color($color: red)
+    border: 5px solid $color
+
+=drop-shadow()
+    -webkit-box-shadow: 5px 5px 22px -8px rgba(122,116,122,1)
+    -moz-box-shadow: 5px 5px 22px -8px rgba(122,116,122,1)
+    box-shadow: 5px 5px 22px -8px rgba(122,116,122,1)
+
+body
+    background-color: $bg-color
+    padding: 100px
+
+.container
+    +rounded-corners(30px)
+    +drop-shadow()
+    +border-color()
+    background-color: $primary-color
+    padding: $padding-top $padding-left $padding-bottom $padding-left
+
+p
+    +border-color(green)
+    background-color: $secondary-color
+    padding: $padding-top $padding-left $padding-bottom $padding-left
+
+a
+    +drop-shadow()
+    padding: $padding-top $padding-left $padding-bottom $padding-left
+
+.btn
+    background-color: $secondary-color
+    padding: 10px 20px
+    cursor: pointer
+    +rounded-corners()
+
+.btn-success
+    @extend .btn // kiterjesztése a .btn osztálynak
+    background-color: green
+
+.btn-error
+    @extend .btn
+    background-color: red

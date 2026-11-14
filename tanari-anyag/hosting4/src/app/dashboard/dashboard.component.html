@@ -1,0 +1,94 @@
+<hr>
+
+<div *ngIf="isLoggedIn$ | async; else notLoggedIn">
+	<input class="form-control mb-2" type="text" [(ngModel)]="problem.title" placeholder="Probléma címe...">
+	<input class="form-control mb-2" type="text" [(ngModel)]="problem.description" placeholder="Probléma részletesen...">
+	<input class="form-control mb-2" type="text" [(ngModel)]="problem.author.displayName" placeholder="Probléma bejelentője..." disabled>
+	<div class="form-check form-switch mb-2">
+		<input class="form-check-input" type="checkbox" id="switch" [(ngModel)]="problem.urgent">
+		<label for="switch" class="form-check-label">Sürgős</label>
+	</div>
+	<div class="d-grid gap-2">
+		<button class="btn btn-success" (click)="submit()">Bejelentés</button>
+	</div>
+</div>
+
+<ng-template #notLoggedIn>
+	<div class="alert alert-primary">
+		Ha új problémát szeretne bejelenteni, kérjük jelentkezzen be!
+	</div>
+</ng-template>
+
+<hr>
+
+<div *ngIf="(service.problems$ | async)?.size !== 0">
+	<select class="form-select mb-5" (change)="sort()" [(ngModel)]="select">
+		<option value="" selected disabled>Rendezés...</option>
+		<option value="upAsc">Upvote alapján növekvő</option>
+		<option value="upDesc">Upvote alapján csökkenő</option>
+		<option value="downAsc">Downvote alapján növekvő</option>
+		<option value="downDesc">Downvote alapján csökkenő</option>
+		<option value="urgent">Sürgősek elöl</option>
+		<option value="original">Eredeti sorrend</option>
+	</select>
+</div>
+
+<div *ngIf="(service.problems$ | async)?.size === 0" class="alert alert-success text-center">
+    <span class="fs-1">😊</span>
+    <br>
+    <b>Szuper, nincs semmi baj!</b>
+    <br>
+    Még nem érkezett bejelentés.
+</div>
+
+<div
+	class="card mb-3"
+	*ngFor="let problem of service.problems$ | async | keyvalue: constant"
+	[ngClass]="{'text-bg-success': problem.value.solved}"
+>
+	<div class="card-body">
+		<h5 class="card-title">
+			{{ problem.value.title }}
+			<i class="bi bi-exclamation-circle" *ngIf="problem.value.urgent"></i>
+		</h5>
+		<h6 class="card-subtitle mb-2 text-muted">
+			<img src="{{problem.value.author.photoURL}}" alt="profile-image" class="rounded-circle" width="20px">
+			{{ problem.value.author.displayName }}
+			<span class="badge text-bg-secondary">
+				{{ problem.value.author.email }}
+			</span>
+		</h6>
+
+		<p class="card-text">{{ problem.value.description }}</p>
+
+		<button
+			class="btn btn-sm btn-secondary me-3"
+			(click)="upVote(problem)"
+			[disabled]="votedAlreadyForThisProblem(problem, currentUser$ | async)"
+		>
+			<i class="bi bi-hand-thumbs-up"></i>
+			{{ problem.value.upVote }}
+		</button>
+
+		<button
+			class="btn btn-sm btn-secondary"
+			(click)="downVote(problem)"
+			[disabled]="votedAlreadyForThisProblem(problem, currentUser$ | async)"
+		>
+			<i class="bi bi-hand-thumbs-down"></i>
+			{{ problem.value.downVote }}
+		</button>
+
+		<div *ngIf="isAdmin$ | async">
+			<hr>
+			<button
+				class="btn btn-sm btn-success me-3"
+				(click)="markSolved(problem)"
+				[disabled]="problem.value.solved"
+			>
+				<i class="bi bi-check-circle-fill"></i>
+				Elhárítva
+			</button>
+		</div>
+	</div>
+</div>

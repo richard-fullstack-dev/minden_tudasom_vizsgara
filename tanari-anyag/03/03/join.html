@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="bg-image">
+    <h1>Jelentkezz csapatunkba!</h1>
+    <p>
+        A Digitera Solutions Zrt. bejelentette, hogy új, energiatakarékos irodába költözött a budapesti XIII. kerületben, amelyet kifejezetten fenntarthatósági szempontok figyelembevételével alakítottak ki. Az új központ nemcsak technológiai szempontból jelent előrelépést, hanem a vállalat környezeti lábnyomának csökkentésében is mérföldkőnek számít.
+    </p>
+    <p>
+        Az épület A+ energiaosztályú, napelemekkel felszerelt, és teljes mértékben megújuló energiát használ az iroda működtetéséhez. A belső tereket úgy tervezték meg, hogy a lehető legtöbb természetes fény jusson be, csökkentve ezzel a mesterséges világítás szükségességét. Az alkalmazottak rugalmas munkaállomások közül választhatnak, a közösségi terekben pedig újrahasznosított anyagokból készült bútorokat helyeztek el. A munkába járást kerékpártárolók, zuhanyzók és elektromos autótöltők is támogatják.
+    </p> 
+    <form>
+        <fieldset>
+            <legend>Személyes adatok</legend>
+            <label>Név</label>
+            <br/>
+            <input type="text" />
+            <br/>
+            <label>Édesanyja neve</label>
+            <br/>
+            <input type="text" />
+            <br/>
+            <label>Születési ideje</label>
+            <br/>
+            <input type="date" />
+            <br/>
+            <label>Email cím</label>
+            <br/>
+            <input type="email" />
+            <br/>
+            <label>Szemüveges-e a jelentkező?</label>
+            <br/>
+            <input name="glasses" type="radio" checked /> Nem
+            <br/>
+            <input name="glasses" type="radio" /> Igen
+            <br/>
+            <label>Adókedvezmények</label>
+            <br/>
+            <input name="tax" type="checkbox" /> Első házas
+            <br/>
+            <input name="tax" type="checkbox" /> 3+ gyereket nevelő
+            <br/>
+            <input name="tax" type="checkbox" /> CSOK
+            <br/>
+            <input name="tax" type="checkbox" /> Egyéb
+            <br/>
+        </fieldset>
+
+        <fieldset>
+            <legend>Jelentkezés részletei</legend>
+            <label>Jelentkezési terület</label>
+            <br/>
+            <select>
+                <option>IT üzemeltetés</option>
+                <option>IT programozás</option>
+                <option>Menedzsment</option>
+                <option>Tesztelés</option>
+                <option>Sales&Marketing</option>
+            </select>
+            <br/>
+            <label>Önéletrajz feltöltése</label>
+            <br/>
+            <input type="file" />
+            <br/>
+            <label>Rövid motivációs levél</label>
+            <br/>
+            <textarea cols="100" rows="10"></textarea>
+        </fieldset>
+
+        <fieldset>
+            <legend>Jelentkezés leadása</legend>
+            <input type="submit" value="Leadás" />
+            <input type="reset" value="Űrlap törlése" />
+        </fieldset>
+    </form>
+</body>
+</html>

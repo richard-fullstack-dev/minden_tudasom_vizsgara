@@ -1,0 +1,22 @@
+
+constructor:
+az osztálypéldány létrehozásakor fut le, főleg egyszerű inicializálásra és dependency injection fogadására való
+
+ngOnInit:
+a komponens inicializálásakor egyszer fut le, kezdő adatok beállítására és induló logikára használatos.
+
+ngOnDestroy:
+a komponens megszűnése előtt fut le, erőforrások felszabadítására, időzítők vagy feliratkozások takarítására való.
+
+-------------
+
+ngOnChanges:
+akkor fut le, amikor egy @Input() érték megváltozik, ezért inputváltozások kezelésére jó.
+
+ngDoCheck:
+minden change detection ellenőrzéskor lefut, egyedi változásfigyelésre használható, de óvatosan, mert gyakran fut. általában kerülendő.
+
+==============
+
+ngAfterContentInit: adott komponensbe kívülről vetített tartalom (content projection)
+ngAfterViewInit: komponens saját ill. gyerek nézetei elkészültek (viewChild)

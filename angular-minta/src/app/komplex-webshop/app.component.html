@@ -1,0 +1,11 @@
+<nav class="navbar navbar-expand bg-body-tertiary px-3">
+  <a class="navbar-brand" routerLink="/">Webshop</a>
+  <a class="nav-link" routerLink="/termekek">Termékek</a>
+  <a class="nav-link" routerLink="/kosar">
+    Kosár <span class="badge bg-primary" *ngIf="kosarService.darabszam > 0">{{ kosarService.darabszam }}</span>
+  </a>
+</nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>

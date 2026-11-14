@@ -1,0 +1,43 @@
+<hr>
+
+<input class="form-control mb-2" type="text" [(ngModel)]="problem.title" placeholder="Probléma címe...">
+<input class="form-control mb-2" type="text" [(ngModel)]="problem.description" placeholder="Probléma részletesen...">
+<input class="form-control mb-2" type="text" [(ngModel)]="problem.author" placeholder="Probléma bejelentője...">
+<div class="form-check form-switch mb-2">
+	<input class="form-check-input" type="checkbox" id="switch" [(ngModel)]="problem.urgent">
+	<label for="switch" class="form-check-label">Sürgős</label>
+</div>
+<div class="d-grid gap-2">
+	<button class="btn btn-success" (click)="submit()">Bejelentés</button>
+</div>
+
+<hr>
+
+<select class="form-select mb-5" (change)="sort()" [(ngModel)]="select">
+	<option value="" selected disabled>Rendezés...</option>
+	<option value="upAsc">Upvote alapján növekvő</option>
+	<option value="upDesc">Upvote alapján csökkenő</option>
+	<option value="downAsc">Downvote alapján növekvő</option>
+	<option value="downDesc">Downvote alapján csökkenő</option>
+	<option value="urgent">Sürgősek elöl</option>
+	<option value="original">Eredeti sorrend</option>
+</select>
+
+<div class="card mb-3" *ngFor="let problem of service.problems$ | async | keyvalue: constant">
+	<div class="card-body">
+		<h5 class="card-title">
+			{{ problem.value.title }}
+			<i class="bi bi-exclamation-circle" *ngIf="problem.value.urgent"></i>
+		</h5>
+		<h6 class="card-subtitle mb-2 text-muted">{{ problem.value.author }}</h6>
+		<p class="card-text">{{ problem.value.description }}</p>
+		<button class="btn btn-sm btn-light me-3" (click)="upVote(problem)">
+			<i class="bi bi-hand-thumbs-up"></i>
+			{{ problem.value.upVote }}
+		</button>
+		<button class="btn btn-sm btn-light" (click)="downVote(problem)">
+			<i class="bi bi-hand-thumbs-down"></i>
+			{{ problem.value.downVote }}
+		</button>
+	</div>
+</div>

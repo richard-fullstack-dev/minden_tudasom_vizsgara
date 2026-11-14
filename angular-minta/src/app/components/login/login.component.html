@@ -1,0 +1,4 @@
+<h4>Login</h4>
+<input class="form-control mb-2" type="text" placeholder="Felhasználónév..." [(ngModel)]="loginModel.username">
+<input class="form-control mb-2" type="password" placeholder="Jelszó..." [(ngModel)]="loginModel.password">
+<button class="btn btn-success" (click)="authService.login(loginModel)">Belépés</button>

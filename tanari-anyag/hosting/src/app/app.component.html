@@ -1,0 +1,13 @@
+<h1>{{ title }}</h1>
+<hr>
+<input type="text" placeholder="Teendő szövege..." [(ngModel)]="newTodo">
+<button (click)="add()">Hozzáadás</button>
+<button (click)="download()">API letöltés</button>
+<hr>
+<h4>Teendők</h4>
+<p *ngFor="let item of todos">{{ item }}</p>
+<hr>
+<h4>Szavak</h4>
+<div class="words">
+	<span *ngFor="let item of words">{{ item }}</span>
+</div>

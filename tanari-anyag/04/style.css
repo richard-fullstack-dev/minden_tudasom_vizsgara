@@ -1,0 +1,68 @@
+body{
+    background-color: beige;
+    background-image: url("bg.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-attachment: fixed;
+    font-family: Verdana;
+}
+
+h1{
+    color: rgb(123, 88, 32);
+    /*text-decoration: underline;*/
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 5px gray;
+    font-weight: normal;
+    font-size: 5vw;
+    font-family: 'Bungee Spice';
+}
+
+p{
+    /*border-style: solid;
+    border-width: 2px 2px 2px 2px;
+    border-color: brown;*/
+
+    border: 2px solid brown;
+    border-width: 2px 0px 2px 0px;
+
+    padding: 10px;
+    margin: 10px 10px 20px 10px;
+    background-color: azure;
+    opacity: 0.9;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: justify;
+    text-indent: 10px;
+    line-height: 1.2em;
+    font-size: 0.9em;
+}
+
+a{
+    text-decoration: none;
+    padding: 10px;
+    color: white;
+    background-color: darkblue;
+}
+
+a:hover{
+    background-color: chartreuse;
+    color: black;
+}
+
+div{
+    margin-bottom: 30px;
+}
+
+ul{
+    list-style-image: url("tick.png");
+    list-style-position: inside;
+}
+
+li{
+    background-color: azure;
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+    width: 20%;
+}
+

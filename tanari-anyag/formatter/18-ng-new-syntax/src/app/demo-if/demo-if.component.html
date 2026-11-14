@@ -1,0 +1,19 @@
+<h2>if</h2>
+
+<button (click)="changeUserStatus()">Change user status</button>
+
+<br>
+
+<div *ngIf="isLoggedIn; else guest">
+    Be vagy jelentkezve
+</div>
+
+<ng-template #guest>
+    Vendég felhasználó
+</ng-template>
+
+@if (isLoggedIn) {
+    <div>Be vagy jelentkezve</div>
+} @else {
+    <div>Vendég felhasználó</div>
+}

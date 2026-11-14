@@ -1,0 +1,20 @@
+<!-- MIRE JÓ:  Bootstrap navbar (hamburger menüvel) Angular linkekkel: routerLink = újratöltés nélküli váltás.
+     ÁTÍRNI:   a linkek (routerLink="/valami") és a feliratok. A *ngIf-es sorok csak belépve / kilépve látszanak. -->
+<nav class="navbar navbar-expand-md bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Márkanév</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" routerLink="/list">Lista</a></li>
+        <li class="nav-item" *ngIf="authService.isLoggedIn()"><a class="nav-link" routerLink="/create">Új termék</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/szulo">Szülő-gyerek</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/konyvek">Könyvek</a></li>
+        <li class="nav-item" *ngIf="!authService.isLoggedIn()"><a class="nav-link" routerLink="/login">Login</a></li>
+        <li class="nav-item" *ngIf="authService.isLoggedIn()"><a class="nav-link" (click)="authService.logout()">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

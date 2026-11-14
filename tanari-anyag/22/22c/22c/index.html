@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 border-bottom p-3">
+                <!--űrlap helye-->
+                <label class="form-label">Teendő neve</label>
+                <input oninput="checkExists()" id="inp_name" class="form-control" type="text" />
+
+                <label class="form-label mt-2">Teendő becsült óraszáma</label>
+                <input id="inp_duration" class="form-control" type="number" />
+
+                <label class="form-label mt-2">Teendő határideje</label>
+                <input id="inp_deadline" class="form-control" type="datetime-local" />
+
+                <button id="btn_add" onclick="addTodo()" class="btn btn-success mt-2"><i class="fa-solid fa-check"></i>
+                    Teendő
+                    rögzítése</button>
+                <br />
+                <div class="row">
+                    <div class="col-auto">
+                        <a id="dwn" class="btn btn btn-warning mt-2">Letöltés JSON-ként</a>
+                    </div>
+                    <div class="col-auto">
+                        <input onchange="upload(event)" type="file" class="form-control form-inline mt-2" />
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="progress mt-2">
+                    <div id="pb_active" class="progress-bar bg-danger" role="progressbar"></div>
+                    <div id="pb_inactive" class="progress-bar bg-success" role="progressbar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <!--bal hasáb-->
+                <h3 class="mt-4 text-center"><i class="fa-regular fa-clock"></i> Aktív teendők</h3>
+                <h6 id="h6_active" class="text-center"></h6>
+                <div class="text-center m-2" id="dots_active"></div>
+                <ul id="ul_active" class="list-group">
+
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <!--jobb hasáb-->
+                <h3 class="mt-4 text-center"><i class="fa-regular fa-circle-check"></i> Végrehajtott teendők</h3>
+                <h6 id="h6_inactive" class="text-center"></h6>
+                <div class="text-center m-2" id="dots_inactive"></div>
+                <ul id="ul_inactive" class="list-group">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

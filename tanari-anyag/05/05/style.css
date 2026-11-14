@@ -1,0 +1,35 @@
+label, input{
+    display: block;
+    width: 98%;
+    margin: 5px;
+    padding: 5px;
+}
+
+div{
+    background-color: aqua;
+    display: block;
+    width: 100%;
+}
+
+table, td, th{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table{
+    width: 100%;
+}
+
+td, th{
+    padding: 7px;
+    text-align: center;
+}
+
+th{
+    background-color: azure;
+    height: 32px;
+}
+
+tr:hover{
+    background-color: lightgoldenrodyellow;
+}

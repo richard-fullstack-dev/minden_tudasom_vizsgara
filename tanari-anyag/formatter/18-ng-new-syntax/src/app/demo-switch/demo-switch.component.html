@@ -1,0 +1,21 @@
+<h2>switch</h2>
+
+<button (click)="changeRole()">Change role</button>
+
+<div [ngSwitch]="role">
+    <p *ngSwitchCase="'admin'">Admin felület</p>
+    <p *ngSwitchCase="'user'">Felhasználói felület</p>
+    <p *ngSwitchDefault>Ismeretlen szerepkör</p>
+</div>
+
+@switch (role) {
+    @case ('admin') {
+        <p>Admin felület</p>
+    }
+    @case ('user') {
+        <p>Felhasználói felület</p>
+    }
+    @default {
+        <p>Ismeretlen szerepkör</p>
+    }
+}

@@ -1,0 +1,34 @@
+.container {
+    margin: 40px;
+    border: 2px solid rgb(225, 67, 141);
+    border-radius: 30px;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.badTip {
+    background-color: rgb(255, 179, 179);
+    color: red;
+}
+
+.goodTip {
+    background-color: rgb(179, 255, 195);
+    color: green;
+}
+
+.tip-result {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.form-control {
+    max-width: 200px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 30px;
+}

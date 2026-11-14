@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container p-2">
+
+        <label class="form-label">Életkor (év)</label>
+        <input id="inp_kor" type="number" class="form-control" value="83" />
+
+        <label class="form-label mt-2">Szemüveg ára (Ft)</label>
+        <input id="inp_szemuveg" type="number" class="form-control" value="30000" />
+
+        <label class="form-label mt-2">Gyermekek száma</label>
+        <input id="inp_gyerekek" type="number" class="form-control" value="3" />
+
+        <button class="btn btn-primary mt-2" onclick="calculate()">Kedvezményes ár számítása</button>
+
+        <div id="result">
+            <table class="table table-bordered mt-3">
+                <tbody>
+                    <tr>
+                        <td>Teljes ár</td>
+                        <td id="res_teljes"></td>
+                    </tr>
+                    <tr>
+                        <td>Kedvezményes ár</td>
+                        <td id="res_kedvezmenyes"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <script>
+        calculate();
+        function calculate() {
+            //kor
+            let k = parseInt(document.getElementById('inp_kor').value);
+
+            //szemüveg ára
+            let s = parseInt(document.getElementById('inp_szemuveg').value);
+
+            //gyerekek száma
+            let g = parseInt(document.getElementById('inp_gyerekek').value);
+
+            let kedvezmeny_szazalek = 100;
+            if (k > 75){
+                kedvezmeny_szazalek = (100 - (g * 3) - (k-75))/100;
+            }
+            else{
+                kedvezmeny_szazalek = (100 - (g * 3))/100;
+            }
+            
+            
+            document.getElementById('res_teljes').innerText = s + ' Ft';
+            document.getElementById('res_kedvezmenyes').innerText = (s * kedvezmeny_szazalek) + ' Ft';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+TODO alkalmazást megcsinálni előről újra
+
+- todo elemre kattintok egérrel -> zöld színe (boostrap) + zöld pipa emoji legyen a sor elején
+
+- legyen egy számláló felül, ami mutatja:
+    - hány todo van összesen
+    - hány van készen
+    - hány nincs készen
+    - 100 (30 / 70)
+
+- lehessen a todo-nak prioritást adni
+    - ha egy todo prio -> legyen piros szaggatott kerete
+
+- lehessen lementeni / betölteni a jelenlegi állapotot (todo-kat)
+
+- minden lépést commitoljatok megfelelően
+
+- ha újra kattintok a todo elemre, akkor a kész állapotból álljon vissza nem kész állapotra

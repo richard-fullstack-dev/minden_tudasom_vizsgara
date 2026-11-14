@@ -1,0 +1,13 @@
+<!-- MIRE JÓ:  űrlap: [(ngModel)] összeköti a mezőt a változóval; [disabled] tiltja a gombot.
+     FONTOS:   FormsModule kell az app.module.ts imports-ban. -->
+<h4>Új termék</h4>
+
+<input class="form-control mb-2" [(ngModel)]="product.name" placeholder="Név..." type="text">
+<input class="form-control mb-2" [(ngModel)]="product.price" placeholder="Ár..." type="number">
+
+<div class="form-check mb-2">
+  <input class="form-check-input" type="checkbox" id="akcio" [(ngModel)]="product.akcio">
+  <label class="form-check-label" for="akcio">Akciós</label>
+</div>
+
+<button class="btn btn-success" (click)="create()" [disabled]="buttonDisabled()">Mentés</button>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS minták</title>
+<!-- MIRE JÓ:   CSS alapok és elrendezés egy fájlban: változók, box model, flexbox, grid, position, float,
+                hover + transition, transform, media query (reszponzív).
+     MIKOR:     "egymás mellé", "középre", "rács", "rögzített elem", "ha a képernyő kisebb, mint...", "egérrel fölé víve...".
+     ÁTÍRNI:    az osztálynevek, méretek, színek. Nyisd meg böngészőben, és játssz az értékekkel. -->
+<style>
+    /* CSS változók: egyszer definiálod, bárhol használod: var(--neve) */
+    :root {
+        --color1: #6f4e37;
+        --color2: #d9534f;
+    }
+
+    /* SZELEKTOROK: elem (p), class (.kartya), id (#fo), leszármazott (nav a), állapot (a:hover) */
+    body { font-family: sans-serif; margin: 20px; }
+
+    /* BOX MODEL: tartalom -> padding (belső tér) -> border (keret) -> margin (külső tér) */
+    .doboz {
+        width: 200px;
+        padding: 10px;                 /* belül */
+        border: 2px solid var(--color1);
+        margin: 10px;                  /* kívül */
+        box-sizing: border-box;        /* a width a paddinggel és kerettel együtt értendő */
+        border-radius: 8px;            /* lekerekítés */
+        box-shadow: 3px 3px 8px gray;  /* árnyék */
+    }
+
+    /* FLEXBOX: gyerekek egy sorban/oszlopban. justify-content = fő irány, align-items = keresztirány */
+    .sor { display: flex; justify-content: space-around; }                  /* egymás mellett, szétosztva */
+    .oszlop { display: flex; flex-direction: column; align-items: stretch; } /* egymás alatt */
+    .kozepre { display: flex; justify-content: center; align-items: center; height: 80px; border: 1px dashed gray; }
+
+    /* GRID: rács sorokkal és oszlopokkal */
+    .racs {
+        display: grid;
+        grid-template-columns: auto auto auto;     /* 3 oszlop (1fr 1fr 1fr = egyenlő) */
+        grid-gap: 10px;
+    }
+
+    /* POSITION: fixed = a képernyőhöz rögzített; absolute = a legközelebbi relative szülőhöz; relative = eredeti helyéhez képest */
+    .rogzitett { position: fixed; top: 10px; right: 10px; background: var(--color2); color: white; padding: 6px; z-index: 10; }
+
+    /* FLOAT: balra/jobbra úsztatás (régi elrendezés) */
+    .balra { float: left; width: 80px; }
+
+    /* HOVER + TRANSITION: egér fölött szín, 2 mp alatt átúszik */
+    nav a { display: inline-block; padding: 8px; background: var(--color1); color: white; text-decoration: none; transition: background-color 2s; }
+    nav a:hover { background: var(--color2); }
+
+    /* TRANSFORM: forgatás, nagyítás, eltolás */
+    .forog:hover { transform: rotate(10deg) scale(1.1); }
+    .forog { display: inline-block; transition: transform 0.5s; }
+
+    /* MEDIA QUERY: csak akkor érvényes, ha a képernyő max. 700px széles (mobil) */
+    @media screen and (max-width: 700px) {
+        .sor { flex-direction: column; }           /* mobilon egymás alá */
+        .racs { grid-template-columns: auto; }     /* mobilon 1 oszlop */
+    }
+</style>
+</head>
+<body>
+    <div class="rogzitett">fix elem</div>
+    <nav><a href="#">Főoldal</a> <a href="#">Rólunk</a></nav>
+
+    <div class="doboz">box model</div>
+
+    <div class="sor"><div class="doboz">1</div><div class="doboz">2</div><div class="doboz">3</div></div>
+    <div class="oszlop"><div class="doboz">A</div><div class="doboz">B</div></div>
+    <div class="kozepre">középre igazított</div>
+
+    <div class="racs"><div class="doboz">g1</div><div class="doboz">g2</div><div class="doboz">g3</div><div class="doboz">g4</div></div>
+
+    <div class="forog doboz">hover + forgat</div>
+</body>
+</html>

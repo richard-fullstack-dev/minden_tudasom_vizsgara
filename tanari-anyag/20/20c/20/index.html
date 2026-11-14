@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-6">
+                <label class="form-label mt-2">Név</label>
+                <input id="inp_name" class="form-control" />
+
+                <label class="form-label mt-2">Életkor</label>
+                <input id="inp_age" type="number" class="form-control" />
+
+                <label class="form-label mt-2">Munkakör</label>
+                <input id="inp_job" class="form-control" />
+
+                <button onclick="add()" class="btn btn-success mt-2">Hozzáadás</button>
+
+                <table class="table table-bordered mt-2">
+                    <tbody>
+                        <tr>
+                            <th>Személyek száma: </th>
+                            <td id="td_szam">0</td>
+                        </tr>
+                        <tr>
+                            <th>Legidősebb személy neve: </th>
+                            <td id="td_max"></td>
+                        </tr>
+                        <tr>
+                            <th>Az összes munkakör: </th>
+                            <td id="td_munkak"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-6">
+                <table class="table table-striped table-bordered m-2">
+                    <thead>
+                        <tr class="table-success text-center">
+                            <th>Név</th>
+                            <th>Életkor</th>
+                            <th>Munkakör</th>
+                            <th>Művelet</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class Person{
+            name;
+            age;
+            job;
+            constructor(name, age, job){
+                this.name = name;
+                this.age = age;
+                this.job = job;
+            }
+        }
+
+        people = [];
+        people.push(new Person('Béla', 22, 'postás'));
+        people.push(new Person('Eszter', 33, 'marketinges'));
+        people.push(new Person('Kata', 26, 'világutazó'));
+
+        displayTable();
+
+        function add(){
+            people.push(new Person(
+                document.getElementById('inp_name').value,
+                parseInt(document.getElementById('inp_age').value),
+                document.getElementById('inp_job').value
+            ));
+            displayTable();
+        }
+
+        function remove(p){
+            people = people.filter(x => x.name != p);
+            displayTable();
+        }
+
+        function displayStat(){
+            if (people.length > 0) {
+                document.getElementById('td_szam').innerText = 
+                    people.length;
+
+                let copy = people;
+                copy.sort((a,b) => b.age - a.age);
+                document.getElementById('td_max').innerText = copy[0].name;
+
+                document.getElementById('td_munkak').innerText =
+                    people.map(t => t.job)
+                        .toString()
+                        .replaceAll(',', ', ');
+            }
+        }
+
+        function displayTable(){
+            document.getElementById('tbody').innerHTML = '';
+            people.forEach(x => {
+                document.getElementById('tbody').innerHTML += 
+                `<tr class="text-center">
+                        <td>${x.name}</td>
+                        <td>${x.age}</td>
+                        <td>${x.job}</td>
+                        <td><button onclick="remove('${x.name}')" class="btn btn-sm btn-danger">Törlés</button></td>
+                </tr>`;
+            });
+            displayStat();
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+OOP alapelvek
+
+- egységbezárás (encapsulation): adatok és műveletek(!) egy egységbe zárása
+
+- absztrakció (abstraction): csak a lényeges működés látszódjon kifelé (adatrejtés)
+
+- öröklődés (inheritance): meglévő osztályból új, specializált osztály létrehozása
+
+- polimorfizmus (polymorphism): többalakúság, azonos felületen keresztül (~ős referencia) más-más működés elérése (leszármazottakon keresztül)
+
+================================
+
+SOLID elvek
+
+S - single responsibility principle -> egy osztálynak, egyetlen, jól behatárolt felelősségi köre legyen
+
+O - open/closed principle -> egy kód legyen nyitott a bővítésre, de zárt a módosításra
+
+L - liskov substitution principle -> a gyermekosztály legyen használható a szülő osztály helyén (legyen helyettesíthető)
+
+I - interface segregation principle -> egy nagy interfész helyett, sok kicsi interfész használata
+
+D - dependency inversion principle -> magasabb szintű modulok, ne konkrét osztályoktól függjenek (dependency injection!!! ennek az elvnek egy konkrét megvalósítása) hanem inkább interfészektől

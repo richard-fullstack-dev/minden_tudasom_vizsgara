@@ -1,0 +1,11 @@
+<!-- MIRE JÓ:  a keret: felül a navbar, alatta a <router-outlet>, ahová az aktuális oldal töltődik.
+     A widget használatának példája: lent. -->
+<app-nav></app-nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+
+  <hr>
+  <app-termekajanlo nev="Espresso" [ar]="700"></app-termekajanlo>
+  <app-termekajanlo nev="Flat white" [ar]="850" [akcio]="true"></app-termekajanlo>
+</div>

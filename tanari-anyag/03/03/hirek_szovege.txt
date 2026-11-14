@@ -1,0 +1,38 @@
+1. hír – Új termék bejelentése
+
+Digitera Solutions bemutatja az AI Flow Suite-et, a hazai KKV-k új titkos fegyverét
+2025. november 24.
+
+A Digitera Solutions Zrt. ma bejelentette legújabb fejlesztését, az AI Flow Suite nevű moduláris üzleti automatizációs platformot, amelyet kifejezetten magyar kis- és középvállalkozások igényeire szabtak. A megoldás célja, hogy egyszerűen bevezethető eszközt adjon a cégek kezébe az adminisztráció csökkentésére, az ügyfélkapcsolatok javítására és a belső folyamatok átláthatóvá tételére – anélkül, hogy mély informatikai tudásra lenne szükség.
+
+Az AI Flow Suite három fő modulból áll: Ügyfélkezelés, Folyamatautomatizálás és Riporting & Elemzés. Az ügyfélkezelési modul segít a beérkező ajánlatkérések, e-mailek és űrlapok automatikus rendszerezésében, miközben mesterséges intelligenciával támogatott javaslatokat ad a következő lépésekre. A folyamatautomatizálás révén a felhasználók vizuális felületen, „fogd és vidd” módon tudják összekattintani saját üzleti folyamataikat, a rendszer pedig gondoskodik az ismétlődő feladatok háttérben történő végrehajtásáról. A riport modul valós időben mutatja meg, melyik folyamat mennyi időt és erőforrást emészt fel.
+
+„A magyar KKV-k túlnyomó része még mindig Excel-táblák és e-mail láncok mögé rejti a működését. Az AI Flow Suite-tel azt szeretnénk elérni, hogy a digitális átállás ne legyen ijesztő és költséges, hanem átlátható, fokozatos és megtérülő folyamat” – mondta Kovács Nóra, a Digitera Solutions vezérigazgatója. Hozzátette: a rendszer bevezetése akár néhány nap alatt megvalósítható, mivel a platform több magyar számlázó- és könyvelőszoftverrel is előre integrált.
+
+A termék már most elérhető „Start”, „Growth” és „Enterprise” csomagban, az érdeklődők pedig egy 14 napos, kötelezettségmentes próbaverziót is igényelhetnek. A Digitera Solutions a következő hónapokban országos bemutatókörutat tervez, ahol élő demókkal, gyakorlati példákkal és konzultációs lehetőségekkel igyekeznek közelebb hozni a mesterséges intelligenciát a hazai középvállalkozások mindennapjaihoz.
+
+2. hír – Új iroda és fenntarthatósági kezdeményezés
+
+Zöldközpontú irodába költözött a Digitera Solutions, és elindította az „1 projekt = 1 fa” programot
+2025. október 3.
+
+A Digitera Solutions Zrt. bejelentette, hogy új, energiatakarékos irodába költözött a budapesti XIII. kerületben, amelyet kifejezetten fenntarthatósági szempontok figyelembevételével alakítottak ki. Az új központ nemcsak technológiai szempontból jelent előrelépést, hanem a vállalat környezeti lábnyomának csökkentésében is mérföldkőnek számít.
+
+Az épület A+ energiaosztályú, napelemekkel felszerelt, és teljes mértékben megújuló energiát használ az iroda működtetéséhez. A belső tereket úgy tervezték meg, hogy a lehető legtöbb természetes fény jusson be, csökkentve ezzel a mesterséges világítás szükségességét. Az alkalmazottak rugalmas munkaállomások közül választhatnak, a közösségi terekben pedig újrahasznosított anyagokból készült bútorokat helyeztek el. A munkába járást kerékpártárolók, zuhanyzók és elektromos autótöltők is támogatják.
+
+Az irodaavatóval egy időben a cég elindította „1 projekt = 1 fa” elnevezésű programját. Ennek keretében minden újonnan induló nagyobb ügyfélprojekt után egy fát ültetnek magyarországi erdősítési kezdeményezések támogatásával. „Sokat beszélünk digitalizációról, de közben nem feledkezhetünk meg arról, hogy a technológia is fogyaszt erőforrásokat. Ezzel a programmal szeretnénk visszaadni valamit a környezetnek, miközben az ügyfeleink is érezhetik, hogy a közös munka túlmutat a képernyőkön” – mondta Tóth Bence, a cég operatív igazgatója.
+
+A vállalat a közeljövőben nyitott szakmai napokat is szervez az új irodában, ahol érdeklődő diákok, pályakezdők és partnerek személyesen is megismerhetik, hogyan működik egy modern, fenntarthatóságra építő technológiai cég. A Digitera Solutions célja, hogy példát mutasson a hazai IT-szektorban a zöld megoldások gyakorlati megvalósítására.
+
+3. hír – Stratégiai együttműködés és oktatási program
+
+Együttműködési megállapodást kötött a Digitera Solutions és a Budapesti Műszaki Egyetem, indul a Digitera Akadémia
+2025. szeptember 12.
+
+A Digitera Solutions Zrt. és a Budapesti Műszaki és Gazdaságtudományi Egyetem (BME) stratégiai együttműködési megállapodást írt alá, amelynek keretében a felek közösen indítják el a Digitera Akadémia nevű gyakorlatorientált oktatási programot. A kezdeményezés célja, hogy a hallgatók naprakész, piacképes tudást szerezzenek a felhőalapú rendszerek, az üzleti folyamat-automatizálás és a mesterséges intelligencia gyakorlati alkalmazása terén.
+
+A program során a diákok nemcsak előadásokat hallgatnak, hanem valódi projekteken dolgoznak együtt a cég szakembereivel. A Digitera Solutions éles, de anonimizált üzleti esettanulmányokat bocsát rendelkezésre, így a résztvevők testközelből tapasztalhatják meg, hogyan zajlik egy ügyféligény felmérése, a megoldás megtervezése, a fejlesztés, majd az éles üzembe helyezés. A félév végén a legjobban teljesítő hallgatók szakmai gyakorlatra vagy gyakornoki állásra is pályázhatnak a vállalatnál.
+
+„Mi magunk is tapasztaltuk, milyen nagy különbség van az elméleti tudás és a valódi, ügyféloldali problémák között. A Digitera Akadémiával ezt a hidat szeretnénk lerövidíteni” – hangsúlyozta Kovács Nóra, a Digitera Solutions vezérigazgatója a sajtótájékoztatón. A BME képviseletében Dr. Szabó Márton dékán kiemelte: az együttműködés jól illeszkedik az egyetem azon törekvéséhez, hogy a hallgatók már tanulmányaik alatt kapcsolatba kerüljenek ipari szereplőkkel.
+
+Az első évfolyam várhatóan 40–50 hallgatóval indul, akik interjú és motivációs levél alapján nyerhetnek felvételt. A Digitera Solutions hosszú távú célja, hogy a programot regionális szinten is kiterjessze, és más egyetemekkel, szakmai szervezetekkel együttműködve hozzájáruljon a magyar digitális ökoszisztéma erősítéséhez.

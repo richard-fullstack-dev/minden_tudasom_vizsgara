@@ -1,0 +1,14 @@
+
+th{
+    color: black;
+    font-size: large;
+    animation-name: animaciom;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animaciom{
+    0%{ font-size: smaller; color: black;}
+    50%{ font-size: medium; color: red;}
+    100%{ font-size: small; color: black;}
+}

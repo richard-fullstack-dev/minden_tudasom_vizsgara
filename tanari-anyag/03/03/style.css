@@ -1,0 +1,35 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+}
+
+.bg-blue{
+    background-color: #191e4d;
+}
+
+a{
+    color: #f2deaa;
+}
+
+.bg-image{
+    background-image: url("bg.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+    background-size: 150px;
+}
+
+.redparag{
+    color: red;
+}
+
+.highlight{
+    border-width: 3px;
+    border-color: yellow;
+    border-style: dashed;
+    padding: 5px;
+}
+
+h3{
+    margin: 0px 4px 20px 4px;
+}

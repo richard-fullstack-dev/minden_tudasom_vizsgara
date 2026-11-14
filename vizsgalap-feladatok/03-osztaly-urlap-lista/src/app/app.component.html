@@ -1,0 +1,18 @@
+<!-- A vázban az űrlap már kész; neked a [(ngModel)] és a (click) kell hozzá. -->
+<div class="container mt-4">
+  <h4>Új könyv</h4>
+
+  <label for="cim" class="form-label">Cím</label>
+  <input type="text" id="cim" class="form-control" [(ngModel)]="cim">
+
+  <label for="isbn" class="form-label mt-2">ISBN</label>
+  <input type="text" id="isbn" class="form-control" [(ngModel)]="isbn">
+
+  <button type="button" class="btn btn-success mt-3" (click)="add()">Hozzáad</button>
+
+  <div class="alert alert-danger mt-3" *ngIf="hiba !== ''">{{ hiba }}</div>
+
+  <ul class="mt-3">
+    <li *ngFor="let k of konyvek">{{ k.toString() }}</li>
+  </ul>
+</div>

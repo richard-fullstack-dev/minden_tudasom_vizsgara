@@ -1,0 +1,14 @@
+/* MIRE JÓ:  animáció a táblázat fejléc celláira (@keyframes): 3 mp, végtelen, a méret és a szín változik.
+   MIKOR:    "animációt készítsen", "@keyframes".
+   ÁTÍRNI:   az animáció neve (villog), az elem (th), a kulcsképkockák értékei, az idő. */
+th {
+    animation-name: villog;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes villog {
+    0%   { font-size: small;  color: black; }
+    50%  { font-size: medium; color: red;   }
+    100% { font-size: small;  color: black; }
+}

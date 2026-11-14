@@ -1,0 +1,29 @@
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Developer } from '../../models/developer';
+import { DeveloperService } from '../../services/developer.service';
+
+@Component({
+  selector: 'app-edit2',
+  templateUrl: './edit2.component.html',
+  styleUrl: './edit2.component.css'
+})
+export class Edit2Component {
+
+  developer: Developer = new Developer()
+
+  constructor(private route: ActivatedRoute, private router: Router, private service: DeveloperService) {
+    route.params.subscribe(x => {
+      let id: string = x['id']
+
+      let result: Developer | undefined = this.service.getById(id)
+      if (result === undefined) this.router.navigateByUrl("list")
+      else this.developer = Object.assign(new Developer(), result)
+    })
+  }
+
+  update(): void {
+    this.service.update(this.developer)
+    this.router.navigateByUrl("list")
+  }
+}

@@ -1,0 +1,44 @@
+.container {
+  border-radius: 30px;
+  margin: 5px;
+  -webkit-box-shadow: 5px 5px 22px -8px #7a747a;
+  -moz-box-shadow: 5px 5px 22px -8px #7a747a;
+  box-shadow: 5px 5px 22px -8px #7a747a;
+  border: 5px solid red;
+  background-color: #28aae2;
+  padding: 13px 5px 10px 5px;
+}
+p {
+  border: 5px solid green;
+  background-color: #d3d3d3;
+  padding: 13px 5px 10px 5px;
+}
+a {
+  -webkit-box-shadow: 5px 5px 22px -8px #7a747a;
+  -moz-box-shadow: 5px 5px 22px -8px #7a747a;
+  box-shadow: 5px 5px 22px -8px #7a747a;
+  padding: 13px 5px 10px 5px;
+}
+.btn {
+  background-color: #d3d3d3;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+}
+.btn-success {
+  background-color: #d3d3d3;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+  background-color: green;
+}
+.btn-error {
+  background-color: #d3d3d3;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+  background-color: red;
+}

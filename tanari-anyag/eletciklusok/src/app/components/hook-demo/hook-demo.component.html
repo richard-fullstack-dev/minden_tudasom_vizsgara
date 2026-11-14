@@ -1,0 +1,77 @@
+<section class="layout">
+	<div class="card controls">
+		<h2>Vezérlőpult</h2>
+		<p>A gombokkal különböző lifecycle eseményeket lehet kiváltani. Nyisd meg a böngésző konzolját is, mert minden hook oda is logolódik.</p>
+
+		<div class="actions">
+			<button (click)="changeInputValue()">
+				&#64;Input string módosítása
+			</button>
+
+			<button class="secondary" (click)="mutateObjectWithoutNewReference()">
+				Objektum belső érték módosítása
+			</button>
+
+			<button class="secondary" (click)="replaceObjectReference()">
+				Objektum új referenciával
+			</button>
+
+			<button class="danger" (click)="toggleChild()">
+				{{ showChild ? "Gyerek komponens törlése" : "Gyerek komponens létrehozása" }}
+			</button>
+
+			<button class="secondary" (click)="clearLogs()">
+				Log törlése
+			</button>
+		</div>
+
+		<div class="state-box">
+			<h3>Szülő aktuális állapota</h3>
+			<p><strong>studentName:</strong> {{ studentName }}</p>
+			<p><strong>user.name:</strong> {{ user.name }}</p>
+			<p><strong>user.points:</strong> {{ user.points }}</p>
+		</div>
+	</div>
+
+	<div class="card child-wrapper">
+		<h2>Gyerek komponens</h2>
+
+		<app-child-demo
+			*ngIf="showChild"
+			[studentName]="studentName"
+			[user]="user"
+		></app-child-demo>
+
+		<p class="placeholder" *ngIf="!showChild">
+			A gyerek komponens jelenleg nincs a DOM-ban.
+		</p>
+	</div>
+</section>
+
+
+<section class="card log-card">
+	<h2>Lifecycle logs</h2>
+
+	<table *ngIf="logService.getEntries.length > 0; else emptyLog">
+		<thead>
+			<tr>
+				<th>Idő</th>
+				<th>Forrás</th>
+				<th>Hook</th>
+				<th>Üzenet</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let entry of logService.getEntries">
+				<td>{{ entry.time }}</td>
+				<td>{{ entry.source }}</td>
+				<td><code>{{ entry.hook }}</code></td>
+				<td>{{ entry.message }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<ng-template #emptyLog>
+		<p class="placeholder">Még nincs logbejegyzés.</p>
+	</ng-template>
+</section>

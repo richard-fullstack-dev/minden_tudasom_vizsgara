@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="hu">
+<head><meta charset="utf-8"><title>Űrlap elemek</title></head>
+<body>
+<!-- MIRE JÓ:   az összes gyakori űrlap-elem és attribútum egy helyen.
+     MIKOR:     "űrlapot készítsen", "szám / dátum / jelszó mező", "kötelező mező", "csúszka", "szövegdoboz".
+     ÁTÍRNI:    az id-k, a feliratok, az attribútumok. A label for = az input id-ja. -->
+<form>
+    <label for="nev">Név</label>
+    <input type="text" id="nev" placeholder="Írd be a neved" required autofocus>   <!-- required = kötelező -->
+
+    <label for="email">E-mail</label>
+    <input type="email" id="email">
+
+    <label for="jelszo">Jelszó</label>
+    <input type="password" id="jelszo">                                  <!-- a begépelt szöveg rejtett -->
+
+    <label for="kor">Kor</label>
+    <input type="number" id="kor" min="0" max="120" value="18">           <!-- min/max = határok, value = alapérték -->
+
+    <label for="datum">Dátum</label>
+    <input type="date" id="datum">
+
+    <label for="csuszka">Csúszka</label>
+    <input type="range" id="csuszka" min="0" max="100" value="50">
+
+    <label for="szoveg">Megjegyzés</label>
+    <textarea id="szoveg" rows="3" cols="30"></textarea>                  <!-- több soros szöveg -->
+
+    <label for="varos">Város</label>
+    <select id="varos">
+        <option>Budapest</option>
+        <option selected>Szeged</option>                                  <!-- selected = alapértelmezett -->
+    </select>
+
+    <!-- rádiógomb: azonos name = csak egy választható; checked = alapértelmezett -->
+    <input type="radio" name="atvetel" id="helyben" checked><label for="helyben">Helyben</label>
+    <input type="radio" name="atvetel" id="futar"><label for="futar">Futár</label>
+
+    <!-- jelölőnégyzet: bármennyi bejelölhető -->
+    <input type="checkbox" id="hab"><label for="hab">Kérek tejszínhabot</label>
+
+    <input type="text" value="nem szerkeszthető" disabled>                <!-- disabled = le van tiltva -->
+    <button type="button">Rendelés</button>                              <!-- type="button": nem küldi el az űrlapot -->
+</form>
+
+<!-- EGYÉB ELEMEK -->
+<ul><li>felsorolás (sorszám nélkül)</li></ul>
+<ol><li>számozott lista</li></ol>
+<nav><a href="#">link</a></nav>                                            <!-- nav = navigációs rész -->
+<aside>oldalsáv</aside>
+<iframe src="https://example.com" width="300" height="150"></iframe>       <!-- másik oldal beágyazása -->
+</body>
+</html>

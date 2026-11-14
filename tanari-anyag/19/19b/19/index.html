@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container p-2">
+
+        <label class="form-label">Kiinduló érték</label>
+        <input id="inp_start" type="number" class="form-control" value="1" />
+
+        <label class="form-label mt-2">Záró érték</label>
+        <input id="inp_end" type="number" class="form-control" value="10" />
+
+        <div class="form-check mt-2">
+            <input class="form-check-input" type="checkbox" id="check_clear">
+            <label class="form-check-label">
+                Képernyő törléssel együtt
+            </label>
+        </div>
+
+        <label class="form-label mt-2">Szín</label>
+        <input type="color" class="form-control form-control-color" id="inp_color" value="#dfff61">
+
+        <label class="form-label mt-2">Növelés értéke</label>
+        <select class="form-select" id="sel_step">
+            <option value="1">Növelés 1-gyel</option>
+            <option value="2">Növelés 2-vel</option>
+            <option value="5">Növelés 5-el</option>
+        </select>
+
+        <button class="btn btn-primary mt-2" onclick="hello()">Kattints ide</button>
+
+        <div id="result">
+        </div>
+
+    </div>
+
+
+    <script>
+        function hello() {
+
+            let start = parseInt(document.getElementById('inp_start').value);
+            let end = parseInt(document.getElementById('inp_end').value);
+            let step = parseInt(document.getElementById('sel_step').value);
+            let color = document.getElementById('inp_color').value;
+            let check = document.getElementById('check_clear').checked;
+
+            if (check) {
+                document.getElementById('result').innerHTML = '';
+            }
+
+
+            for (let i = start; i <= end; i+=step) {
+                document.getElementById('result').innerHTML +=
+                    `<span class="badge text-bg-warning m-1" style="background-color: ${color} !important">${i}</span>`
+            }
+        }
+    </script>
+</body>
+
+</html>

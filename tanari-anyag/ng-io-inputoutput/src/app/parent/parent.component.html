@@ -1,0 +1,8 @@
+<div>
+    <h1>PARENT</h1>
+    <app-child
+        [item]="item"
+        (message)="hello($event)"
+        *ngFor="let item of dataItems"
+    ></app-child>
+</div>

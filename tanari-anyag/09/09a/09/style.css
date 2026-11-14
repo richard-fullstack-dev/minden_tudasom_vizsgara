@@ -1,0 +1,55 @@
+:root {
+    --companyBlue: #1e90ff;
+    --companyWhite: #f6f4f4;
+}
+
+
+input:disabled{
+    background-color: black;
+}
+
+li:empty{
+    border: 1px;
+    border-bottom: 1px;
+    border-color: red;
+    border-style: solid;
+    width: 100px;
+}
+
+li:first-of-type{
+    color: var(--companyBlue);
+}
+
+input:invalid{
+    color: red;
+}
+
+input:focus{
+    outline: 3px solid blue;
+}
+
+h1::first-letter{
+    color: var(--companyBlue);
+}
+
+p::selection{
+    background-color: lightpink;
+}
+
+
+
+
+input[min]{
+    background-color: var(--companyBlue);
+}
+
+.red{
+    background-color: lightcoral;
+}
+
+
+
+a[href*="telex"]{
+    background-color: red;
+}
+

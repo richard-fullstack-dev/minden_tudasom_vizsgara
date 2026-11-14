@@ -1,0 +1,52 @@
+<h2>for</h2>
+
+<button (click)="changeNumber()">Change number</button>
+
+<p>{{ score }}</p>
+
+@if (score >= 90) {
+    <p>Kiváló</p>
+} @else if (score >= 60) {
+    <p>Megfelelt</p>
+} @else {
+    <p>Nem felelt meg</p>
+}
+
+<hr>
+
+<button (click)="removeUser()">Remove user</button>
+
+<li *ngFor="let user of users">
+    {{ user.id }} - {{ user.name }}
+</li>
+
+<!-- track => elemek újrarenderelésénél követés -->
+<!-- @for (user of users; track $index) -->
+
+<!-- @for (
+    user of users;
+    track user.id;
+    let i = $index;
+    let first = $first;
+    let last = $last;
+    let even = $even;
+    let odd = $odd
+) -->
+
+<ul>
+    @for (user of users; track user.id; let i = $index) {
+        <li>[{{i}}] : {{ user.id }} - {{ user.name }}</li>
+    } @empty {
+        <p>Nincs megjeleníthető felhasználó.</p>
+    }
+</ul>
+
+<p>--------</p>
+
+<ul *ngIf="users.length > 0; else emptyList">
+    <li *ngFor="let user of users">{{ user.name }}</li>
+</ul>
+
+<ng-template #emptyList>
+    <p>Nincs adat.</p>
+</ng-template>

@@ -1,0 +1,38 @@
+h1{
+    text-align: center;
+    border: 1px solid black;
+    width: 30%;
+    margin: auto;
+    transition: color 1s, font-size 2s, width 5s, transform 5s;
+    transition-timing-function: ease-in;
+}
+
+h1:hover{
+    color: red;
+    font-size: 3em;
+    width: 50%;
+    transform: rotate(3deg);
+}
+
+@keyframes anim1{
+    0% {background-color: lightcyan; font-size: 40px;}
+    100% {background-color: lightgoldenrodyellow; font-size: 60px; top: 80vh}
+}
+
+div{
+    border: 1px solid black;
+    width: 200px;
+    line-height: 20vh;
+    text-align: center;
+    font-size: 40px;
+    background-color: lightcyan;
+    animation-name: anim1;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    position: fixed;
+    top: 0;
+    left: 0;
+}

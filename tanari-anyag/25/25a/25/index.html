@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container-md">
+        <h1>Bevásárlólista</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Hozzávaló hozzáadása</h4>
+                <label class="form-label">Hozzávaló neve</label>
+                <input id="inp_name" type="text" class="form-control" />
+                <label class="form-label mt-2">Mennyiség</label>
+                <input id="inp_amount" type="number" class="form-control" />
+                <label class="form-label mt-2">Mennyiség egység</label>
+                <select id="sel_unit" class="form-select">
+                    <option value="kg">kg</option>
+                    <option value="g">g</option>
+                    <option value="l">l</option>
+                    <option value="ml">ml</option>
+                    <option value="db">db</option>
+                </select>
+                <label class="form-label mt-2">Kategória</label>
+                <select id="sel_cat" class="form-select">
+                    <option value="1">Húsfélék/tejtermékek/tojás</option>
+                    <option value="2">Gyümölcs/zöldség</option>
+                    <option value="3">Tésztafélék/péktermékek</option>
+                    <option value="4">Késztermékek</option>
+                </select>
+                <button onclick="add()" class="btn btn-primary mt-2">Hozzáadás</button>
+            </div>
+            <div class="col-md-6">
+                <h4>Bevásárlólista</h4>
+                <ul id="ul_result" class="list-group">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+
+  <h1>Todo App</h1>
+  <input type="text" placeholder="To do this..." [(ngModel)]="newTodo2.content">
+  <br>
+  <button (click)="add()">Add Todo</button>
+  <hr>
+  <p *ngFor="let item of todos">
+    {{ formatDate(item.timeStamp) }} &rarr; {{ item.content }}
+  </p>

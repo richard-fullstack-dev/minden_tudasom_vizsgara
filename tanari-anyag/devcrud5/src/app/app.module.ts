@@ -1,0 +1,48 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NavComponent } from './nav/nav.component';
+import { FooterComponent } from './footer/footer.component';
+import { ListComponent } from './list/list.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { CreateComponent } from './create/create.component';
+import { FormsModule } from '@angular/forms';
+import { DeleteComponent } from './delete/delete.component';
+import { EditComponent } from './edit/edit.component';
+import { Edit2Component } from './edit2/edit2.component';
+import { StatsComponent } from './stats/stats.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SkillsComponent } from './skills/skills.component';
+
+import localeHu from '@angular/common/locales/hu';
+import { registerLocaleData } from '@angular/common';
+import { SkillCardComponent } from './skill-card/skill-card.component';
+registerLocaleData(localeHu)
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    NavComponent,
+    FooterComponent,
+    ListComponent,
+    HomepageComponent,
+    CreateComponent,
+    DeleteComponent,
+    EditComponent,
+    Edit2Component,
+    StatsComponent,
+    SkillsComponent,
+    SkillCardComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

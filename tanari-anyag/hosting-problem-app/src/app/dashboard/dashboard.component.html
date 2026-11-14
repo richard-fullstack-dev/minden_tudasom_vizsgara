@@ -1,0 +1,18 @@
+<hr>
+
+<input class="form-control mb-2" type="text" [(ngModel)]="problem.title" placeholder="Probléma címe...">
+<input class="form-control mb-2" type="text" [(ngModel)]="problem.description" placeholder="Probléma részletesen...">
+<input class="form-control mb-2" type="text" [(ngModel)]="problem.author" placeholder="Probléma bejelentője...">
+<div class="d-grid gap-2">
+	<button class="btn btn-success" (click)="submit()">Bejelentés</button>
+</div>
+
+<hr>
+
+<div class="card mb-3" *ngFor="let problem of service.problems$ | async">
+	<div class="card-body">
+		<h5 class="card-title">{{ problem.title }}</h5>
+		<h6 class="card-subtitle mb-2 text-muted">{{ problem.author }}</h6>
+		<p class="card-text">{{ problem.description }}</p>
+	</div>
+</div>

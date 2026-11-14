@@ -1,0 +1,18 @@
+<h4>Termékek</h4>
+
+<input class="form-control mb-2" [(ngModel)]="kereses" placeholder="Keresés..." type="text">
+<div class="alert alert-warning" *ngIf="uzenet !== ''">{{ uzenet }}</div>
+
+<table class="table table-striped">
+  <thead><tr><th>Név</th><th>Ár</th><th>Készlet</th><th></th></tr></thead>
+  <tbody>
+    <tr *ngFor="let t of szurt">
+      <td>{{ t.nev }} <span class="badge bg-danger" *ngIf="t.akcio">AKCIÓ</span></td>
+      <td>{{ t.ar | currency: 'HUF':'symbol':'1.0-0':'hu-HU' }}</td>
+      <td>{{ t.keszlet === 0 ? 'elfogyott' : t.keszlet + ' db' }}</td>
+      <td>
+        <button class="btn btn-sm btn-success" (click)="kosarba(t)" [disabled]="t.keszlet === 0">Kosárba</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
