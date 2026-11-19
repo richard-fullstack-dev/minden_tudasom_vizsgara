@@ -1,3 +1,37 @@
+## FELADATMONDAT-SZÓTÁR (ezt keresd először!)
+
+> Itt a **feladat saját szavával** keresel (Ctrl+F). A jobb oldali „Keress a kártyán" szót a kártyán belül írd be, az odavezet a kész kódhoz.
+
+| Ha a feladat ezt mondja... | Kártya | Keress a kártyán |
+|---|---|---|
+| gombra kattintva nőjön / csökkenjen valami (számláló, példányszám) | **K17** (gomb + függvény), osztályba: **K08** | `(click)` |
+| a mezőbe írt szöveg azonnal jelenjen meg | **K17** | `[(ngModel)]`, aztán `{{` |
+| ár ezres tagolással, Ft-tal | **K16** | `toLocaleString` vagy `currency` |
+| három menüpont / aloldal, oldal újratöltése nélkül | **K13** | `routerLink`, `path:` |
+| menüsor (navbar) | **K01** (Bootstrap), **K13** (routing) | `navbar` |
+| új komponens, bárhol elhelyezhető, paramétert kap | **K14** | `@Input` |
+| ugyanabból három példány, más-más adattal | **K14** (komponens), **K08** (osztály) | `<app-`, `new ` |
+| ha igaz, akkor kerüljön rá egy class (pl. akcio) | **K14** | `[class.` |
+| színt / méretet SCSS változóból, _colors.scss | **K05** | `@use`, `$` |
+| osztály, privát mező, hibás értéknél ne jöjjön létre | **K08** | `throw new Error`, `#` |
+| kiírásnál „Cím (ISBN)" alakú szöveg | **K08** | `toString` |
+| lista kiírása, ismétlődő elemek | **K16** | `*ngFor` |
+| adatok tárolása, service | **K16** | `@Injectable` |
+| űrlap, új elem hozzáadása a listához | **K17** | `push` |
+| gomb tiltva, ha üres a mező | **K17** | `[disabled]` |
+| hibaüzenet kiírása (kivétel miatt) | **K17**, **K08** | `try`, `catch` |
+| törlés / szerkesztés / keresés | **K18** | `splice`, `filter` |
+| átlag, legnagyobb, legkisebb, darabszám | **K19** | `reduce` |
+| maradjon meg újratöltés után | **K20** | `localStorage` |
+| adat szerverről (API) | **K21** | `HttpClient`, `subscribe` |
+| belépés, kilépés | **K22** | `token` |
+| gyerek szóljon a szülőnek | **K15** | `@Output` |
+| teszt fut, mit kér a spec | **K25** | `spec` |
+| hibaüzenet a konzolon | **K26** | a hiba első szavát |
+| publikálás | **K24** | `firebase deploy` |
+
+**Nincs külön kártya:** egyszerű számláló (kattintásra +1). Ott a K17 (gomb + függvény) és a `tanari-anyag/counter-app` mappa a minta.
+
 Ebben a fájlban VS Code-ban **Ctrl + Shift + V** (szebb, formázott nézet).
 
 1. Olvasd a **tartalomjegyzéket** lent: a jobb oldali szavak a feladat szavai.
@@ -3256,3 +3290,110 @@ A `README.md` és a `kepek/` mappa együtt legyen a repo gyökerében (a kép el
 ## Teljes fájlok
 
 A kártyákban a lényeges kód benne van. Ha egész fájlt akarsz kimásolni: `angular-minta/`, `html-css-bootstrap-minta/`, `scss-minta/`, `js-minta/` mappák (a kártyák fájljaival egyeznek).
+
+number | null = null: a mező szám vagy üres lehet, és üresen indul, így látszik a placeholder (ha 0 lenne, a 0 kitakarná)
+
+```html
+<ul>
+  <li><a routerLink="homepage">Homepage</a></li>
+  <li><a routerLink="list">List developers</a></li>
+</ul>
+
+
+Lépésekben input mezők kiiratása
+
+
+
+## K40 Input mezőkből adat begyűjtése → service → lista komponens
+
+**Ha a feladat ezt mondja:** űrlap, input mezők, adat begyűjtése, hozzáadás gombra kerüljön a listába, másik oldalon/komponensben listázza.
+
+**Lépések:**
+1. Model: `developer.ts`
+2. Service: `ng g s developer` (itt él a lista, mert két komponens is eléri)
+3. Create komponens: `ng g c create` (input mezők + gomb)
+4. List komponens: `ng g c list` (kiírás)
+5. Nav komponens: `ng g c nav` (menü)
+6. `app.module.ts`: `FormsModule` az imports-ban
+7. Routing: `create` és `list` útvonal
+8. `app.component.html`: `<app-nav>` + `<router-outlet>`
+
+**1. developer.ts**
+```ts
+export class Developer {
+  name: string = "";
+  age: number | null = null;   // null: üresen indul, látszik a placeholder
+}
+```
+
+**2. developer.service.ts**
+```ts
+@Injectable({ providedIn: 'root' })
+export class DeveloperService {
+  developers: Developer[] = [];
+}
+```
+
+**3. create.component.ts**
+```ts
+export class CreateComponent {
+  developer: Developer = new Developer();
+
+  constructor(private service: DeveloperService) {}
+
+  adddev() {
+    this.service.developers.push(this.developer);
+    this.developer = new Developer();   // ürítés, különben ugyanaz az objektum marad
+  }
+}
+```
+
+**create.component.html**
+```html
+<input type="text" placeholder="Add meg a neved..." [(ngModel)]="developer.name">
+<input type="number" placeholder="Add meg a korod..." [(ngModel)]="developer.age">
+<button (click)="adddev()">Hozzáad</button>
+```
+
+**4. list.component.ts**
+```ts
+export class ListComponent {
+  constructor(public service: DeveloperService) {}   // public: a html látja
+}
+```
+
+**list.component.html**
+```html
+<p *ngFor="let item of service.developers">{{ item.name }} ({{ item.age }})</p>
+```
+
+**5. nav.component.html**
+```html
+<ul>
+  <li><a routerLink="create">Create</a></li>
+  <li><a routerLink="list">List developers</a></li>
+</ul>
+```
+
+**7. app-routing.module.ts**
+```ts
+const routes: Routes = [
+  { path: "create", component: CreateComponent },
+  { path: "list", component: ListComponent }
+];
+```
+
+**8. app.component.html**
+```html
+<app-nav></app-nav>
+<router-outlet></router-outlet>
+```
+
+**Tipikus hibák:**
+- `developers.push` elől hiányzik a `this.` / `this.service.`
+- Nincs `new Developer()` az ürítésnél → minden sor együtt változik
+- `FormsModule` hiányzik → `Can't bind to 'ngModel'`
+- Komponensben `imports:` → `TS-992010`, modulos projektben az `app.module.ts`-be való
+- Ha a spec külön metódust kér (pl. `getAll()`), azt a service-be is meg kell írni
+```
+Látható a komplett create list devcrud egy képben képen a readme fölött

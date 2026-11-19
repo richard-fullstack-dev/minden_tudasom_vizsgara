@@ -1,0 +1,11 @@
+Saját megoldás vázlat könyvbemutató oldalak Miklósnak
+1. git repo letölt és npm i
+2. ng test 8 hibát kell látni
+3. fooldal humor scifi componensek
+4. path-ba bekötni
+5. app.component.html-ben router-outlet
+6. főoldal szövege p tagbe
+7. scifi szövege ol/li-be
+8. humor tartalma egy táblázatba (minta bs-ről)
+9. c feladat bs nav sáv ehhez bs nav kimásol
+10.nav átírás + routerlinkek
