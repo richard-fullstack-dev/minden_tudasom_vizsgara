@@ -1,4 +1,4 @@
-# Otthoni próbafeladatok vizsgafelkészülésre
+# Otthoni saját próbafeladatok vizsgafelkészülésre
 
 ```
 //---------- src/app/app.routes.ts ----------
