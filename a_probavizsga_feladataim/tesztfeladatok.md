@@ -1,16 +1,18 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
-8 src/app/app-routing.module.ts
+3 src/app/app-routing.module.ts
 
 ```
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FooldalComponent } from './fooldal/fooldal.component';
-import { FilmekComponent } from './filmek/filmek.component';
+import { KaveComponent } from './kave/kave.component';
+import { SutikComponent } from './sutik/sutik.component';
 
 const routes: Routes = [
   { path: '', component: FooldalComponent },
-  { path: 'filmek', component: FilmekComponent },
+  { path: 'kave', component: KaveComponent },
+  { path: 'sutik', component: SutikComponent },
 ];
 
 @NgModule({
@@ -23,7 +25,36 @@ export class AppRoutingModule { }
 src/app/fooldal/fooldal.component.html
 
 ```
-<p>Üdvözöljük a mozi oldalán!</p>
+<p>(a feladat3-tartalom.txt főoldali szövege)</p>
+```
+
+src/app/kave/kave.component.html
+
+```
+<ul>
+  <li>(a feladat3-tartalom.txt kávék listájának 1. sora)</li>
+  <li>(a feladat3-tartalom.txt kávék listájának 2. sora)</li>
+  <li>(a feladat3-tartalom.txt kávék listájának 3. sora)</li>
+</ul>
+```
+
+src/app/sutik/sutik.component.html
+
+```
+<table class="table">
+  <tr>
+    <th>(a feladat3-tartalom.txt sütik táblázatának 1. oszlopcíme)</th>
+    <th>(a feladat3-tartalom.txt sütik táblázatának 2. oszlopcíme)</th>
+  </tr>
+  <tr>
+    <td>(1. sor 1. adat)</td>
+    <td>(1. sor 2. adat)</td>
+  </tr>
+  <tr>
+    <td>(2. sor 1. adat)</td>
+    <td>(2. sor 2. adat)</td>
+  </tr>
+</table>
 ```
 
 src/app/app.component.html
@@ -36,7 +67,10 @@ src/app/app.component.html
         <a class="nav-link" routerLink="/">Főoldal</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/filmek">Filmek</a>
+        <a class="nav-link" routerLink="/kave">Kávék</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/sutik">Sütik</a>
       </li>
     </ul>
   </div>
@@ -47,113 +81,77 @@ src/app/app.component.html
 </div>
 ```
 
-src/app/filmkartya/filmkartya.component.ts
+src/app/app.module.ts
+
+```
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FooldalComponent } from './fooldal/fooldal.component';
+import { KaveComponent } from './kave/kave.component';
+import { SutikComponent } from './sutik/sutik.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    FooldalComponent,
+    KaveComponent,
+    SutikComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+4 src/app/termekajanlo/termekajanlo.component.ts
 
 ```
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-filmkartya',
-  templateUrl: './filmkartya.component.html',
-  styleUrl: './filmkartya.component.scss'
+  selector: 'app-termekajanlo',
+  templateUrl: './termekajanlo.component.html',
+  styleUrl: './termekajanlo.component.scss'
 })
-export class FilmkartyaComponent {
-  @Input() cim: string = '';
-  @Input() ev: number = 0;
-  @Input() ujdonsag: boolean = false;
+export class TermekajanloComponent {
+  @Input() nev: string = '';
+  @Input() ar: number = 0;
+  @Input() akcio: boolean = false;
 }
 ```
 
-src/app/filmkartya/filmkartya.component.html
+src/app/termekajanlo/termekajanlo.component.html
 
 ```
-<h3>{{ cim }}</h3>
-<p [class.ujdonsag]="ujdonsag">{{ ev }}</p>
+<h3>{{ nev }}</h3>
+<p [ngClass]="{ akcio: akcio }">{{ ar }} Ft</p>
 ```
 
-src/app/filmkartya/filmkartya.component.scss
+src/app/termekajanlo/termekajanlo.component.scss
 
 ```
-.ujdonsag {
+@import '../colors';
+
+.akcio {
   font-weight: bold;
-  color: red;
+  font-size: 1.5em;
+  color: $kiemeles;
 }
 ```
 
-src/app/film.ts
+src/app/app.component.html
 
 ```
-export class Film {
-  #cim: string;
-  #ev: number;
-
-  constructor(cim: string, ev: number) {
-    if (cim.trim() === '') {
-      throw new Error('A cím nem lehet üres!');
-    }
-    if (Math.floor(ev) !== ev || ev < 1900 || ev > 2100) {
-      throw new Error('Az év 1900 és 2100 közötti egész szám lehet!');
-    }
-    this.#cim = cim;
-    this.#ev = ev;
-  }
-
-  getCim(): string {
-    return this.#cim;
-  }
-
-  getEv(): number {
-    return this.#ev;
-  }
-
-  toString(): string {
-    return `${this.#cim} (${this.#ev})`;
-  }
-}
-```
-
-src/app/filmek/filmek.component.ts
-
-```
-import { Component } from '@angular/core';
-import { Film } from '../film';
-
-@Component({
-  selector: 'app-filmek',
-  templateUrl: './filmek.component.html',
-  styleUrl: './filmek.component.scss'
-})
-export class FilmekComponent {
-  cim: string = '';
-  ev: number | null = null;
-  filmek: Film[] = [];
-
-  hozzaad(): void {
-    try {
-      this.filmek.push(new Film(this.cim, Number(this.ev)));
-      this.cim = '';
-      this.ev = null;
-    } catch (error) {
-    }
-  }
-}
-```
-
-src/app/filmek/filmek.component.html
-
-```
-<h4>Új film</h4>
-<form>
-  <label for="cim" class="form-label">Cím</label>
-  <input type="text" id="cim" name="cim" class="form-control" [(ngModel)]="cim">
-  <label for="ev" class="form-label mt-2">Év</label>
-  <input type="number" id="ev" name="ev" class="form-control" [(ngModel)]="ev">
-  <button type="button" class="btn btn-primary mt-3" (click)="hozzaad()">Hozzáadás</button>
-</form>
-
-<div class="mt-3">
-  <app-filmkartya *ngFor="let f of filmek" [cim]="f.getCim()" [ev]="f.getEv()"></app-filmkartya>
-</div>
+<app-termekajanlo nev="Espresso" [ar]="700"></app-termekajanlo>
+<app-termekajanlo nev="Latte" [ar]="900"></app-termekajanlo>
+<app-termekajanlo nev="Flat white" [ar]="850" [akcio]="true"></app-termekajanlo>
 ```
 
 src/app/app.module.ts
@@ -161,25 +159,19 @@ src/app/app.module.ts
 ```
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooldalComponent } from './fooldal/fooldal.component';
-import { FilmekComponent } from './filmek/filmek.component';
-import { FilmkartyaComponent } from './filmkartya/filmkartya.component';
+import { TermekajanloComponent } from './termekajanlo/termekajanlo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooldalComponent,
-    FilmekComponent,
-    FilmkartyaComponent
+    TermekajanloComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
