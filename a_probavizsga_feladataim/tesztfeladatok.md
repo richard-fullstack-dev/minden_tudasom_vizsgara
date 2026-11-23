@@ -1,112 +1,6 @@
-# Próbavizsga tesztfeladatok
+# Próbavizsga 1 – Könyvbemutató (2026.11.23.)
 
-> Angular 17+, standalone komponensek (`app.routes.ts`, `app.config.ts`).
-> VS Code-ban szép nézet: **Ctrl + Shift + V**
-
----
-
-## Próbavizsga 1 – Könyvbemutató oldalak (2026.11.23.)
-
-### A feladatlap (a fotóról átírva)
-
-**3. feladat – Könyvbemutató oldalak (20 pont)**
-Az antikvárium könyvbemutatót szervez. Készítse el ezen könyvek bemutató oldalainak egyetlen alkalmazásban.
-
-- a) Készítsen három aloldalt, amelyek között frontend routing segítségével lehet navigálni. Zárójelben találja a URL-t.
-  - Főoldal ( / )
-  - Sci-Fi ( /scifi )
-  - Humor ( /humor )
-- b) A három aloldal tartalmát a `feladat3-tartalom.txt` fájlban találja. A főoldalt egy bekezdésben, a sci-fi oldalt egy sorszámozás nélküli listában, a humor oldalt egy táblázatban helyezze el (az első sor címsor).
-- c) Készítsen vízszintes navigációs sávot az oldal tetején bootstrap segítségével. A linkek pontos megnevezését az a) feladatrészben találja. A linkeket úgy készítse el, hogy az oldal újratöltése nélkül is lehessen az aloldalak között navigálni!
-
-**4. feladat – Könyvajánló widget (15 pont)**
-Szükség van egy bármelyik oldalon elhelyezhető widget-re, amely segítségével egy adott könyvet lehet reklámozni.
-
-- a) Készítsen egy új komponenst `konyvajanlo` néven. A komponens kis-nagybetűs használata, fájlneve feleljen meg a keretrendszerben elvártaknak.
-- b) A komponenshez adja hozzá az alábbi paramétereket. A paraméterek kis-nagybetűs használata feleljen meg a keretrendszerben elvártaknak.
-  - `nev`: string, a könyv neve
-  - `ar`: number, a könyv ára
-  - `akcio`: bool, a könyv jelenleg le van-e értékelve. Opcionális, az alapértéke false.
-- c) A komponens megjelenítése az alábbi legyen:
-  - A név 3-as szintű címsorként jelenjen meg.
-  - Az ár bekezdésként, alapértelmezett formázással.
-  - Ha az akcio paraméter true, akkor alkalmazza az ár bekezdésére az `akcio` class-t.
-- d) Készítsen egy SCSS fájlt, amelyben definiálja a fent említett `akcio` class-t. Az akciós megjelenítés legyen:
-  - Félkövér
-  - Az alapértelmezettnél nagyobb betűméretű
-  - A betűszín a `_colors.scss` fájlban definiált `kiemeles` változó legyen.
-  - A definiált class legyen része a kimeneti CSS fájlnak.
-- e) A fő komponensben, tesztelési célból hozzon létre három példányt az új komponensből, az alábbi adatokkal:
-  - A Gyűrű Szövetsége, 2500 Ft, nem akciós
-  - A Két Torony, 2000 Ft, nem akciós
-  - A Király Visszatér, 999 Ft, akciós
-
-**5. feladat – Új könyvek felvétele (20 pont)**
-Az új könyveket létrehozó űrlap már elkészült, azonban még nem funkcionális. Tegye interaktívvá, és készítse el a hozzá tartozó adatszerkezetet!
-
-- a) Készítse el a `Konyv` osztályt az alábbi leírás alapján:
-  - Két privát tagváltozó: `#cim`: szöveg, `#isbn`: szöveg
-  - Konstruktor, amely ellenőrzi:
-    - a címnek nem lehet üres
-    - a ISBN-nek pontosan 10 vagy 13 számjegy karakterből kell állnia (egyéb ellenőrzésre nincs szükség)
-    - hibás paraméterek esetén kivétellel jelezze a hibát.
-  - `toString` metódus, amely `Cím (ISBN)` formában adja vissza az adatokat.
-- b) Az oldal fő komponensét egészítse ki, hogy képes legyen a könyvekből álló lista tárolására.
-  - A form kitöltésével a lista végéhez a felhasználó képes legyen új adatot hozzáadni
-  - Új könyv hozzáadásakor a formot ürítse
-
-*(A fotó itt véget ér; ha a b) résznek van folytatása, a következő képpel kiegészítem.)*
-
----
-
-
-### Mappastruktúra
-
-```text
-src/
-├── index.html                          ← Bootstrap CDN (ha a váz nem tartalmazza)
-└── app/
-    ├── _colors.scss                    ← a vázból ($kiemeles), NE írd felül
-    ├── app.config.ts                   ← a vázból, NE írd át (provideRouter)
-    ├── app.routes.ts                   ← 3. feladat
-    ├── app.component.ts                ← 3–5. feladat (imports)
-    ├── app.component.html              ← navbar + router-outlet + 3 widget + űrlap + lista
-    ├── konyv.ts                        ← 5. feladat
-    ├── fooldal/  fooldal.component.ts | .html
-    ├── scifi/    scifi.component.ts   | .html
-    ├── humor/    humor.component.ts   | .html
-    └── konyvajanlo/ konyvajanlo.component.ts | .html | .scss
-```
-
-### Parancsok
-
-```bash
-npm install
-```
-
-```bash
-ng g c fooldal --skip-tests
-```
-
-```bash
-ng g c scifi --skip-tests
-```
-
-```bash
-ng g c humor --skip-tests
-```
-
-```bash
-ng g c konyvajanlo --style=scss --skip-tests
-```
-
-```bash
-ng test
-```
-
----
-
-### 3. feladat – Routing, aloldalak, navbar
+## 3. feladat
 
 ```
 //---------- src/app/app.routes.ts ----------
@@ -204,9 +98,7 @@ export class HumorComponent {}
 </table>
 ```
 
----
-
-### 4. feladat – Könyvajánló widget
+## 4. feladat
 
 ```
 //---------- src/app/konyvajanlo/konyvajanlo.component.ts ----------
@@ -257,9 +149,7 @@ export class AppComponent {}
 <app-konyvajanlo nev="A Király Visszatér" [ar]="999" [akcio]="true"></app-konyvajanlo>
 ```
 
----
-
-### 5. feladat – Konyv osztály, űrlap, lista
+## 5. feladat
 
 ```
 //---------- src/app/konyv.ts ----------
@@ -335,16 +225,3 @@ export class AppComponent {
   </ul>
 </div>
 ```
-
----
-
-### Amire a teszt figyel
-
-- Linkszöveg pontosan: **Főoldal**, **Sci-Fi**, **Humor**; `routerLink`, NEM `href`.
-- Sci-Fi: `<ul>` (nem `<ol>`). Humor: első sor `<th>`.
-- `[ar]="2500"` szögletes zárójellel (különben szöveg lesz).
-- `#cim`, `#isbn`; `toString()` pontosan `Cím (ISBN)`.
-- Hibás adatnál a lista nem változik; siker után a mezők kiürülnek.
-- `Can't bind to 'ngModel'` → `FormsModule` hiányzik az `imports`-ból.
-- `'app-konyvajanlo' is not a known element` → `KonyvajanloComponent` hiányzik az `imports`-ból.
-- Bootstrap nincs a vázban → `src/index.html` `<head>`: `<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">`
