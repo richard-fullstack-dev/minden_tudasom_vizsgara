@@ -1,180 +1,225 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
 ```
-<!DOCTYPE html>
-<html lang="hu">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Antikvárium</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">Antikvárium</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Menü">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="menu">
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="#konyveink">Könyveink</a></li>
-            <li class="nav-item"><a class="nav-link" href="#kapcsolat">Kapcsolat</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+export class Konyv {
+  #cim: string;
+  #isbn: string;
 
-  <main class="container my-4">
-    <section id="konyveink">
-      <h2>Könyveink</h2>
-      <div class="row">
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">A Gyűrű Szövetsége</h5>
-              <p class="card-text">2500 Ft</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">A Két Torony</h5>
-              <p class="card-text">2000 Ft</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">A Király Visszatér <span class="badge bg-danger">AKCIÓ</span></h5>
-              <p class="card-text">999 Ft</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  constructor(cim: string, isbn: string) {
+    if (cim.trim() === '') {
+      throw new Error('A cím nem lehet üres!');
+    }
+    if (!/^(\d{10}|\d{13})$/.test(isbn)) {
+      throw new Error('Az ISBN pontosan 10 vagy 13 számjegy legyen!');
+    }
+    this.#cim = cim;
+    this.#isbn = isbn;
+  }
 
-    <section id="kapcsolat" class="mt-4">
-      <h2>Kapcsolat</h2>
-      <form>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="nev" class="form-label">Név</label>
-            <input type="text" id="nev" name="nev" class="form-control" autofocus>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="email" class="form-label">E-mail</label>
-            <input type="email" id="email" name="email" class="form-control" required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="uzenet" class="form-label">Üzenet</label>
-            <textarea id="uzenet" name="uzenet" class="form-control" rows="4"></textarea>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-success">Küldés</button>
-      </form>
-    </section>
-  </main>
-
-  <footer class="bg-dark text-white text-center py-3">
-    <p class="mb-0">Antikvárium</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-```
-
-```
-body {
-  background-color: red;
-}
-
-@media (max-width: 992px) {
-  body {
-    background-color: blue;
+  toString(): string {
+    return `${this.#cim} (${this.#isbn})`;
   }
 }
+```
 
-@media (max-width: 599px) {
-  body {
-    background-color: green;
+```
+export class LoginModel {
+  username: string = '';
+  password: string = '';
+}
+```
+
+```
+export class TokenModel {
+  token: string = '';
+}
+```
+
+```
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginModel } from '../models/login-model';
+import { TokenModel } from '../models/token-model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  apiUrl: string = 'http://localhost:3000/login';
+  hiba: string = '';
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  login(loginModel: LoginModel): void {
+    this.http.post<TokenModel>(this.apiUrl, loginModel).subscribe({
+      next: valasz => {
+        localStorage.setItem('auth-token', valasz.token);
+        this.hiba = '';
+        this.router.navigateByUrl('konyvek');
+      },
+      error: () => {
+        this.hiba = 'Hibás felhasználónév vagy jelszó!';
+      }
+    });
+  }
+
+  logout(): void {
+    localStorage.removeItem('auth-token');
+    this.router.navigateByUrl('login');
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('auth-token') !== null;
+  }
+
+  canActivate(): boolean {
+    if (this.isLoggedIn()) {
+      return true;
+    }
+    this.router.navigateByUrl('login');
+    return false;
   }
 }
+```
 
-.card {
-  transition: transform 0.5s;
-}
+```
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { LoginModel } from '../models/login-model';
+import { AuthService } from '../services/auth.service';
 
-.card:hover {
-  transform: scale(1.05);
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './login.component.html',
+})
+export class LoginComponent {
+  loginModel: LoginModel = new LoginModel();
+
+  constructor(public authService: AuthService) {}
 }
 ```
 
 ```
-const konyvek = [
-  { cim: "A Gyűrű Szövetsége", ar: 2500, akcio: false },
-  { cim: "A Két Torony", ar: 2000, akcio: false },
-  { cim: "A Király Visszatér", ar: 999, akcio: true },
-  { cim: "Dűne", ar: 3200, akcio: true },
-  { cim: "Alapítvány", ar: 1800, akcio: false },
+<h4>Belépés</h4>
+
+<label for="username" class="form-label">Felhasználónév</label>
+<input type="text" id="username" name="username" class="form-control mb-2" [(ngModel)]="loginModel.username">
+
+<label for="password" class="form-label">Jelszó</label>
+<input type="password" id="password" name="password" class="form-control mb-2" [(ngModel)]="loginModel.password">
+
+<button type="button" class="btn btn-success" (click)="authService.login(loginModel)">Belépés</button>
+
+@if (authService.hiba) {
+  <div class="alert alert-danger mt-3">{{ authService.hiba }}</div>
+}
+```
+
+```
+import { Routes } from '@angular/router';
+import { KonyvekComponent } from './konyvek/konyvek.component';
+import { UjKonyvComponent } from './uj-konyv/uj-konyv.component';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './services/auth.service';
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'konyvek', pathMatch: 'full' },
+  { path: 'konyvek', component: KonyvekComponent },
+  { path: 'uj-konyv', component: UjKonyvComponent, canActivate: [AuthService] },
+  { path: 'login', component: LoginComponent },
 ];
+```
 
-function atlagar(lista) {
-  if (lista.length === 0) {
-    return 0;
-  }
-  let osszeg = 0;
-  for (const konyv of lista) {
-    osszeg += konyv.ar;
-  }
-  return Math.round(osszeg / lista.length);
-}
+```
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { routes } from './app.routes';
 
-function legdragabb(lista) {
-  let legdragabbKonyv = lista[0];
-  for (const konyv of lista) {
-    if (konyv.ar > legdragabbKonyv.ar) {
-      legdragabbKonyv = konyv;
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes), provideHttpClient()]
+};
+```
+
+```
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Konyv } from './konyv';
+import { AuthService } from './services/auth.service';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, FormsModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+})
+export class AppComponent {
+  cim: string = '';
+  isbn: string = '';
+  hiba: string = '';
+  konyvek: Konyv[] = [];
+
+  constructor(public authService: AuthService) {}
+
+  hozzaad(): void {
+    try {
+      this.konyvek.push(new Konyv(this.cim, this.isbn));
+      this.cim = '';
+      this.isbn = '';
+      this.hiba = '';
+    } catch (e) {
+      this.hiba = (e as Error).message;
     }
   }
-  return legdragabbKonyv;
 }
+```
 
-function akciosDarab(lista) {
-  return lista.filter(konyv => konyv.akcio).length;
-}
+```
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/konyvek">Könyvek</a>
+      </li>
+      @if (authService.isLoggedIn()) {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/uj-konyv">Új könyv</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer;" (click)="authService.logout()">Logout</a>
+        </li>
+      } @else {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+      }
+    </ul>
+  </div>
+</nav>
 
-function keres(lista, szoveg) {
-  return lista.filter(konyv => konyv.cim.toLowerCase().includes(szoveg.toLowerCase()));
-}
+<div class="container mt-4">
+  <router-outlet />
 
-function rendez(lista) {
-  return [...lista].sort((a, b) => a.ar - b.ar);
-}
+  <h4 class="mt-4">Új könyv</h4>
+  <label for="cim" class="form-label">Cím</label>
+  <input type="text" id="cim" name="cim" class="form-control" [(ngModel)]="cim">
+  <label for="isbn" class="form-label mt-2">ISBN</label>
+  <input type="text" id="isbn" name="isbn" class="form-control" [(ngModel)]="isbn">
+  <button type="button" class="btn btn-primary mt-3" (click)="hozzaad()">Hozzáad</button>
 
-function ajandek(lista, osszeg) {
-  let talalat = null;
-  for (const konyv of lista) {
-    if (konyv.ar > osszeg && (talalat === null || konyv.ar < talalat.ar)) {
-      talalat = konyv;
-    }
+  @if (hiba) {
+    <div class="alert alert-danger mt-3">{{ hiba }}</div>
   }
-  return talalat;
-}
 
-function betoltes(szoveg) {
-  return JSON.parse(szoveg);
-}
-
-function mentes(lista) {
-  return JSON.stringify(lista);
-}
-
-module.exports = { konyvek, atlagar, legdragabb, akciosDarab, keres, rendez, ajandek, betoltes, mentes };
+  <ul class="mt-3">
+    @for (k of konyvek; track $index) {
+      <li>{{ k.toString() }}</li>
+    }
+  </ul>
+</div>
 ```
