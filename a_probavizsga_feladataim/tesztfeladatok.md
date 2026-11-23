@@ -9,8 +9,11 @@ export class Konyv {
     if (cim.trim() === '') {
       throw new Error('A cím nem lehet üres!');
     }
-    if (!/^(\d{10}|\d{13})$/.test(isbn)) {
-      throw new Error('Az ISBN pontosan 10 vagy 13 számjegy legyen!');
+    if (isbn.length !== 10 && isbn.length !== 13) {
+      throw new Error('Az ISBN 10 vagy 13 karakter legyen!');
+    }
+    if (isNaN(Number(isbn))) {
+      throw new Error('Az ISBN csak számjegy lehet!');
     }
     this.#cim = cim;
     this.#isbn = isbn;
@@ -172,8 +175,8 @@ export class AppComponent {
       this.cim = '';
       this.isbn = '';
       this.hiba = '';
-    } catch (e) {
-      this.hiba = (e as Error).message;
+    } catch (error) {
+      this.hiba = 'Hibás adatok!';
     }
   }
 }
