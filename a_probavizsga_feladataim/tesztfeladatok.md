@@ -1,18 +1,25 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
-3 src/app/app.routes.ts
+3 src/app/app-routing.module.ts
 
 ```
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { FooldalComponent } from './fooldal/fooldal.component';
 import { ScifiComponent } from './scifi/scifi.component';
 import { HumorComponent } from './humor/humor.component';
 
-export const routes: Routes = [
+const routes: Routes = [
   { path: '', component: FooldalComponent },
   { path: 'scifi', component: ScifiComponent },
   { path: 'humor', component: HumorComponent },
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
 ```
 
 src/app/fooldal/fooldal.component.html
@@ -37,44 +44,12 @@ src/app/humor/humor.component.html
 
 ```
 <table class="table">
-  <tr>
-    <th>Cím</th>
-    <th>Szerző</th>
-  </tr>
-  <tr>
-    <td>Galaxis útikalauz stopposoknak</td>
-    <td>Douglas Adams</td>
-  </tr>
-  <tr>
-    <td>Svejk</td>
-    <td>Jaroslav Hašek</td>
-  </tr>
-  <tr>
-    <td>Három ember egy csónakban</td>
-    <td>Jerome K. Jerome</td>
-  </tr>
-  <tr>
-    <td>Micimackó</td>
-    <td>A. A. Milne</td>
-  </tr>
+  <tr><th>Cím</th><th>Szerző</th></tr>
+  <tr><td>Galaxis útikalauz stopposoknak</td><td>Douglas Adams</td></tr>
+  <tr><td>Svejk</td><td>Jaroslav Hašek</td></tr>
+  <tr><td>Három ember egy csónakban</td><td>Jerome K. Jerome</td></tr>
+  <tr><td>Micimackó</td><td>A. A. Milne</td></tr>
 </table>
-```
-
-src/app/app.component.ts
-
-```
-import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, RouterLink],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent {
-}
 ```
 
 src/app/app.component.html
@@ -97,8 +72,37 @@ src/app/app.component.html
 </nav>
 
 <div class="container mt-3">
-  <router-outlet />
+  <router-outlet></router-outlet>
 </div>
+```
+
+src/app/app.module.ts
+
+```
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FooldalComponent } from './fooldal/fooldal.component';
+import { ScifiComponent } from './scifi/scifi.component';
+import { HumorComponent } from './humor/humor.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    FooldalComponent,
+    ScifiComponent,
+    HumorComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 ```
 
 4 src/app/konyvajanlo/konyvajanlo.component.ts
@@ -108,7 +112,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-konyvajanlo',
-  standalone: true,
   templateUrl: './konyvajanlo.component.html',
   styleUrl: './konyvajanlo.component.scss'
 })
@@ -138,28 +141,35 @@ src/app/konyvajanlo/konyvajanlo.component.scss
 }
 ```
 
-src/app/app.component.ts
-
-```
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { KonyvajanloComponent } from './konyvajanlo/konyvajanlo.component';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, KonyvajanloComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent {
-}
-```
-
 src/app/app.component.html
 
 ```
 <app-konyvajanlo nev="A Gyűrű Szövetsége" [ar]="2500"></app-konyvajanlo>
 <app-konyvajanlo nev="A Két Torony" [ar]="2000"></app-konyvajanlo>
 <app-konyvajanlo nev="A Király Visszatér" [ar]="999" [akcio]="true"></app-konyvajanlo>
+```
+
+src/app/app.module.ts
+
+```
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { KonyvajanloComponent } from './konyvajanlo/konyvajanlo.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    KonyvajanloComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 ```
