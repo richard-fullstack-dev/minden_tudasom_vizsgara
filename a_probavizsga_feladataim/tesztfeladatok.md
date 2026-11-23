@@ -1,6 +1,6 @@
 # Próbavizsga tesztfeladatok
 
-> Angular 17, NgModule-os projekt (`app.module.ts`), ahogy a tanári anyagban.
+> Angular 17+, standalone komponensek (`app.routes.ts`, `app.config.ts`).
 > VS Code-ban szép nézet: **Ctrl + Shift + V**
 
 ---
@@ -59,34 +59,26 @@ Az új könyveket létrehozó űrlap már elkészült, azonban még nem funkcion
 
 ---
 
-### Mappastruktúra (egy képben)
+
+### Mappastruktúra
 
 ```text
 src/
-├── index.html                      ← Bootstrap CDN (ha a váz nem tartalmazza)
+├── index.html                          ← Bootstrap CDN (ha a váz nem tartalmazza)
 └── app/
-    ├── _colors.scss                ← a vázból ($kiemeles) – NE írd felül
-    ├── konyv.ts                    ← 5. feladat: Konyv osztály
-    ├── app.module.ts               ← declarations + FormsModule
-    ├── app-routing.module.ts       ← 3. feladat: routes
-    ├── app.component.ts            ← 5. feladat: lista + add()
-    ├── app.component.html          ← navbar + router-outlet + 3 widget + űrlap + lista
-    ├── fooldal/
-    │   ├── fooldal.component.ts
-    │   └── fooldal.component.html  ← <p>
-    ├── scifi/
-    │   ├── scifi.component.ts
-    │   └── scifi.component.html    ← <ul><li>
-    ├── humor/
-    │   ├── humor.component.ts
-    │   └── humor.component.html    ← <table> (első sor <th>)
-    └── konyvajanlo/
-        ├── konyvajanlo.component.ts    ← @Input nev, ar, akcio
-        ├── konyvajanlo.component.html  ← <h3> + <p [class.akcio]>
-        └── konyvajanlo.component.scss  ← .akcio
+    ├── _colors.scss                    ← a vázból ($kiemeles), NE írd felül
+    ├── app.config.ts                   ← a vázból, NE írd át (provideRouter)
+    ├── app.routes.ts                   ← 3. feladat
+    ├── app.component.ts                ← 3–5. feladat (imports)
+    ├── app.component.html              ← navbar + router-outlet + 3 widget + űrlap + lista
+    ├── konyv.ts                        ← 5. feladat
+    ├── fooldal/  fooldal.component.ts | .html
+    ├── scifi/    scifi.component.ts   | .html
+    ├── humor/    humor.component.ts   | .html
+    └── konyvajanlo/ konyvajanlo.component.ts | .html | .scss
 ```
 
-### Parancsok (sorrendben)
+### Parancsok
 
 ```bash
 npm install
@@ -109,10 +101,6 @@ ng g c konyvajanlo --style=scss --skip-tests
 ```
 
 ```bash
-ng serve -o
-```
-
-```bash
 ng test
 ```
 
@@ -120,61 +108,99 @@ ng test
 
 ### 3. feladat – Routing, aloldalak, navbar
 
-**`src/app/app-routing.module.ts`**
-```ts
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+```
+//---------- src/app/app.routes.ts ----------
+import { Routes } from '@angular/router';
 import { FooldalComponent } from './fooldal/fooldal.component';
 import { ScifiComponent } from './scifi/scifi.component';
 import { HumorComponent } from './humor/humor.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: FooldalComponent },
   { path: 'scifi', component: ScifiComponent },
   { path: 'humor', component: HumorComponent },
-  { path: '**', redirectTo: '' }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+//---------- src/app/app.component.ts ----------
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
-export class AppRoutingModule { }
-```
+export class AppComponent {}
 
-**`src/app/fooldal/fooldal.component.html`** (a szöveg a txt FŐOLDAL részéből)
-```html
-<p>IDE A FŐOLDAL SZÖVEGE A feladat3-tartalom.txt-BŐL</p>
-```
+//---------- src/app/app.component.html ----------
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Főoldal</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/scifi" routerLinkActive="active">Sci-Fi</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/humor" routerLinkActive="active">Humor</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<router-outlet />
 
-**`src/app/scifi/scifi.component.html`** (a txt SCI-FI sorai, soronként egy `<li>`)
-```html
+//---------- src/app/fooldal/fooldal.component.ts ----------
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-fooldal',
+  standalone: true,
+  templateUrl: './fooldal.component.html',
+})
+export class FooldalComponent {}
+
+//---------- src/app/fooldal/fooldal.component.html ----------
+<p>IDE a feladat3-tartalom.txt főoldali szövege</p>
+
+//---------- src/app/scifi/scifi.component.ts ----------
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-scifi',
+  standalone: true,
+  templateUrl: './scifi.component.html',
+})
+export class ScifiComponent {}
+
+//---------- src/app/scifi/scifi.component.html ----------
 <ul>
-  <li>1. sci-fi könyv a txt-ből</li>
-  <li>2. sci-fi könyv a txt-ből</li>
-  <li>3. sci-fi könyv a txt-ből</li>
+  <li>IDE az 1. sci-fi könyv a txt-ből</li>
+  <li>IDE a 2. sci-fi könyv a txt-ből</li>
 </ul>
-```
 
-**`src/app/humor/humor.component.html`** (a txt HUMOR része, az első sor a fejléc)
-```html
+//---------- src/app/humor/humor.component.ts ----------
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-humor',
+  standalone: true,
+  templateUrl: './humor.component.html',
+})
+export class HumorComponent {}
+
+//---------- src/app/humor/humor.component.html ----------
 <table class="table">
-  <thead>
-    <tr>
-      <th>Cím</th>
-      <th>Szerző</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1. könyv címe</td>
-      <td>1. könyv szerzője</td>
-    </tr>
-    <tr>
-      <td>2. könyv címe</td>
-      <td>2. könyv szerzője</td>
-    </tr>
-  </tbody>
+  <tr>
+    <th>Cím</th>
+    <th>Szerző</th>
+  </tr>
+  <tr>
+    <td>IDE az 1. adat a txt-ből</td>
+    <td>IDE az 1. adat a txt-ből</td>
+  </tr>
 </table>
 ```
 
@@ -182,47 +208,61 @@ export class AppRoutingModule { }
 
 ### 4. feladat – Könyvajánló widget
 
-**`src/app/konyvajanlo/konyvajanlo.component.ts`**
-```ts
+```
+//---------- src/app/konyvajanlo/konyvajanlo.component.ts ----------
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-konyvajanlo',
+  standalone: true,
   templateUrl: './konyvajanlo.component.html',
-  styleUrl: './konyvajanlo.component.scss'
+  styleUrl: './konyvajanlo.component.scss',
 })
 export class KonyvajanloComponent {
   @Input() nev: string = '';
   @Input() ar: number = 0;
   @Input() akcio: boolean = false;
 }
-```
 
-**`src/app/konyvajanlo/konyvajanlo.component.html`**
-```html
+//---------- src/app/konyvajanlo/konyvajanlo.component.html ----------
 <h3>{{ nev }}</h3>
 <p [class.akcio]="akcio">{{ ar }}</p>
-```
 
-**`src/app/konyvajanlo/konyvajanlo.component.scss`**
-```scss
-@use '../colors';
+//---------- src/app/konyvajanlo/konyvajanlo.component.scss ----------
+@use '../colors';   // ha a _colors.scss az src/-ben van: @use '../../colors';
 
 .akcio {
   font-weight: bold;
   font-size: 1.5em;
   color: colors.$kiemeles;
 }
-```
 
-> Ha a `_colors.scss` nem az `src/app/`-ban van, hanem az `src/`-ben: `@use '../../colors';`
+//---------- src/app/app.component.ts (a 3. feladatos felülírva) ----------
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { KonyvajanloComponent } from './konyvajanlo/konyvajanlo.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, KonyvajanloComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+})
+export class AppComponent {}
+
+//---------- src/app/app.component.html (a <router-outlet /> ALÁ) ----------
+<app-konyvajanlo nev="A Gyűrű Szövetsége" [ar]="2500"></app-konyvajanlo>
+<app-konyvajanlo nev="A Két Torony" [ar]="2000"></app-konyvajanlo>
+<app-konyvajanlo nev="A Király Visszatér" [ar]="999" [akcio]="true"></app-konyvajanlo>
+```
 
 ---
 
 ### 5. feladat – Konyv osztály, űrlap, lista
 
-**`src/app/konyv.ts`**
-```ts
+```
+//---------- src/app/konyv.ts ----------
 export class Konyv {
   #cim: string;
   #isbn: string;
@@ -242,16 +282,20 @@ export class Konyv {
     return `${this.#cim} (${this.#isbn})`;
   }
 }
-```
 
-**`src/app/app.component.ts`**
-```ts
+//---------- src/app/app.component.ts (VÉGLEGES, a 4. feladatos felülírva) ----------
 import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { KonyvajanloComponent } from './konyvajanlo/konyvajanlo.component';
 import { Konyv } from './konyv';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, FormsModule, KonyvajanloComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   cim: string = '';
@@ -270,94 +314,37 @@ export class AppComponent {
     }
   }
 }
-```
 
-> Ha az `app.component.ts`-ben van `styleUrl`/`styleUrls` sor, azt hagyd benne.
-
----
-
-### Közös fájlok
-
-**`src/app/app.component.html`** (az 5. feladat űrlapja a vázban már kész: csak a `[(ngModel)]`, `(click)`, a hibaüzenet és a lista kell bele; a mezők `id`-jét és osztályait hagyd úgy, ahogy a vázban van)
-```html
-<nav class="navbar navbar-expand bg-body-tertiary px-3">
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Főoldal</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/scifi" routerLinkActive="active">Sci-Fi</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/humor" routerLinkActive="active">Humor</a>
-    </li>
-  </ul>
-</nav>
-
-<div class="container mt-3">
-  <router-outlet></router-outlet>
-
-  <app-konyvajanlo nev="A Gyűrű Szövetsége" [ar]="2500"></app-konyvajanlo>
-  <app-konyvajanlo nev="A Két Torony" [ar]="2000"></app-konyvajanlo>
-  <app-konyvajanlo nev="A Király Visszatér" [ar]="999" [akcio]="true"></app-konyvajanlo>
-
-  <h4 class="mt-4">Új könyv</h4>
+//---------- src/app/app.component.html (a widgetek ALÁ; a vázban lévő űrlapba csak a [(ngModel)] és a (click) kell) ----------
+<div class="container mt-4">
+  <h4>Új könyv</h4>
   <label for="cim" class="form-label">Cím</label>
   <input type="text" id="cim" name="cim" class="form-control" [(ngModel)]="cim">
   <label for="isbn" class="form-label mt-2">ISBN</label>
   <input type="text" id="isbn" name="isbn" class="form-control" [(ngModel)]="isbn">
   <button type="button" class="btn btn-primary mt-3" (click)="hozzaad()">Hozzáad</button>
 
-  <div class="alert alert-danger mt-3" *ngIf="hiba">{{ hiba }}</div>
+  @if (hiba) {
+    <div class="alert alert-danger mt-3">{{ hiba }}</div>
+  }
 
   <ul class="mt-3">
-    <li *ngFor="let k of konyvek">{{ k.toString() }}</li>
+    @for (k of konyvek; track $index) {
+      <li>{{ k.toString() }}</li>
+    }
   </ul>
 </div>
 ```
 
-**`src/app/app.module.ts`**
-```ts
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FooldalComponent } from './fooldal/fooldal.component';
-import { ScifiComponent } from './scifi/scifi.component';
-import { HumorComponent } from './humor/humor.component';
-import { KonyvajanloComponent } from './konyvajanlo/konyvajanlo.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    FooldalComponent,
-    ScifiComponent,
-    HumorComponent,
-    KonyvajanloComponent
-  ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-**`src/index.html`** (csak ha a vázban NINCS Bootstrap: a `<head>`-be)
-```html
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-```
-
 ---
 
-### Amire a teszt figyel (pontlevonás ellen)
+### Amire a teszt figyel
 
-- Linkszöveg pontosan: **Főoldal**, **Sci-Fi**, **Humor**. `routerLink`, NEM `href`.
+- Linkszöveg pontosan: **Főoldal**, **Sci-Fi**, **Humor**; `routerLink`, NEM `href`.
 - Sci-Fi: `<ul>` (nem `<ol>`). Humor: első sor `<th>`.
-- `nev`, `ar`, `akcio` kisbetűvel. `[ar]="2500"` szögletes zárójellel (különben szöveg lesz).
-- Az ár `<p>`-ben, extra formázás nélkül; az `akcio` class csak akkor, ha `true`.
-- `#cim`, `#isbn` (valódi privát). `toString()` pontosan: `Cím (ISBN)`.
-- Hibás adatnál a lista nem változik; sikeres hozzáadás után a mezők kiürülnek.
-- `Can't bind to 'ngModel'` → hiányzik a `FormsModule`.
-- `'app-konyvajanlo' is not a known element` → hiányzik a `declarations`-ből.
+- `[ar]="2500"` szögletes zárójellel (különben szöveg lesz).
+- `#cim`, `#isbn`; `toString()` pontosan `Cím (ISBN)`.
+- Hibás adatnál a lista nem változik; siker után a mezők kiürülnek.
+- `Can't bind to 'ngModel'` → `FormsModule` hiányzik az `imports`-ból.
+- `'app-konyvajanlo' is not a known element` → `KonyvajanloComponent` hiányzik az `imports`-ból.
+- Bootstrap nincs a vázban → `src/index.html` `<head>`: `<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">`
