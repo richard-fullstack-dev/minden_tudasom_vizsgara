@@ -1,6 +1,6 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
-**src/app/konyv.ts**
+src/app/konyv.ts
 
 ```
 export class Konyv {
@@ -27,7 +27,7 @@ export class Konyv {
 }
 ```
 
-**src/app/models/login-model.ts**
+src/app/models/login-model.ts
 
 ```
 export class LoginModel {
@@ -36,7 +36,7 @@ export class LoginModel {
 }
 ```
 
-**src/app/models/token-model.ts**
+src/app/models/token-model.ts
 
 ```
 export class TokenModel {
@@ -44,7 +44,7 @@ export class TokenModel {
 }
 ```
 
-**src/app/services/auth.service.ts**
+src/app/services/auth.service.ts
 
 ```
 import { HttpClient } from '@angular/common/http';
@@ -94,7 +94,7 @@ export class AuthService {
 }
 ```
 
-**src/app/login/login.component.ts**
+src/app/login/login.component.ts
 
 ```
 import { Component } from '@angular/core';
@@ -115,7 +115,7 @@ export class LoginComponent {
 }
 ```
 
-**src/app/login/login.component.html**
+src/app/login/login.component.html
 
 ```
 <h4>Belépés</h4>
@@ -133,7 +133,7 @@ export class LoginComponent {
 }
 ```
 
-**src/app/app.routes.ts**
+src/app/app.routes.ts
 
 ```
 import { Routes } from '@angular/router';
@@ -150,7 +150,7 @@ export const routes: Routes = [
 ];
 ```
 
-**src/app/app.config.ts**
+src/app/app.config.ts
 
 ```
 import { ApplicationConfig } from '@angular/core';
@@ -163,7 +163,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-**src/app/app.component.ts**
+src/app/app.component.ts
 
 ```
 import { Component } from '@angular/core';
@@ -200,7 +200,7 @@ export class AppComponent {
 }
 ```
 
-**src/app/app.component.html**
+src/app/app.component.html
 
 ```
 <nav class="navbar navbar-expand navbar-dark bg-dark">
