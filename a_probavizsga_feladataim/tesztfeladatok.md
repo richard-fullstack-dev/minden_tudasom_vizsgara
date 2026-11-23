@@ -91,7 +91,7 @@ export class Film {
     if (cim.trim() === '') {
       throw new Error('A cím nem lehet üres!');
     }
-    if (!Number.isInteger(ev) || ev < 1900 || ev > 2100) {
+    if (Math.floor(ev) !== ev || ev < 1900 || ev > 2100) {
       throw new Error('Az év 1900 és 2100 közötti egész szám lehet!');
     }
     this.#cim = cim;
