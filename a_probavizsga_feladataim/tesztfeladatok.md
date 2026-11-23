@@ -1,6 +1,6 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
-feladat1/index.html
+index.html
 
 ```
 <!DOCTYPE html>
@@ -92,7 +92,7 @@ feladat1/index.html
 </html>
 ```
 
-feladat1/style.css
+style.css
 
 ```
 body {
@@ -120,7 +120,7 @@ body {
 }
 ```
 
-feladat2/script.js
+script.js
 
 ```
 const konyvek = [
