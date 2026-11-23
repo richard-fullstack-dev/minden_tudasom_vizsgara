@@ -1,4 +1,4 @@
-Saját megoldás vázlat könyvbemutató oldalak Miklósnak
+Saját megoldás vázlat könyvbemutató oldalak 
 1. git repo letölt és npm i
 2. ng test 8 hibát kell látni
 3. fooldal humor scifi componensek
