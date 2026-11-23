@@ -1,18 +1,219 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
-3 src/app/app-routing.module.ts
+5 src/app/konyv.ts
+
+```
+export class Konyv {
+  #cim: string;
+  #isbn: string;
+
+  constructor(cim: string, isbn: string) {
+    if (cim.trim() === '') {
+      throw new Error('A cím nem lehet üres!');
+    }
+    if (isbn.length !== 10 && isbn.length !== 13) {
+      throw new Error('Az ISBN 10 vagy 13 karakter legyen!');
+    }
+    if (isNaN(Number(isbn))) {
+      throw new Error('Az ISBN csak számjegy lehet!');
+    }
+    this.#cim = cim;
+    this.#isbn = isbn;
+  }
+
+  toString(): string {
+    return `${this.#cim} (${this.#isbn})`;
+  }
+}
+```
+
+src/app/app.module.ts
+
+```
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+src/app/app.component.ts
+
+```
+import { Component } from '@angular/core';
+import { Konyv } from './konyv';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+  cim: string = '';
+  isbn: string = '';
+  konyvek: Konyv[] = [];
+
+  hozzaad(): void {
+    try {
+      this.konyvek.push(new Konyv(this.cim, this.isbn));
+      this.cim = '';
+      this.isbn = '';
+    } catch (error) {
+    }
+  }
+}
+```
+
+src/app/app.component.html
+
+```
+<div class="container mt-4">
+  <h4>Új könyv</h4>
+  <form>
+    <label for="cim" class="form-label">Cím</label>
+    <input type="text" id="cim" name="cim" class="form-control" [(ngModel)]="cim">
+    <label for="isbn" class="form-label mt-2">ISBN</label>
+    <input type="text" id="isbn" name="isbn" class="form-control" [(ngModel)]="isbn">
+    <button type="button" class="btn btn-primary mt-3" (click)="hozzaad()">Hozzáad</button>
+  </form>
+
+  <ul class="mt-3">
+    <li *ngFor="let k of konyvek">{{ k.toString() }}</li>
+  </ul>
+</div>
+```
+
+6 src/app/models/login-model.ts
+
+```
+export class LoginModel {
+  username: string = '';
+  password: string = '';
+}
+```
+
+src/app/models/token-model.ts
+
+```
+export class TokenModel {
+  token: string = '';
+}
+```
+
+src/app/services/auth.service.ts
+
+```
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginModel } from '../models/login-model';
+import { TokenModel } from '../models/token-model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  apiUrl: string = '(a feladat függelékében megadott API cím)/login';
+  hiba: string = '';
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  login(loginModel: LoginModel): void {
+    this.http.post<TokenModel>(this.apiUrl, loginModel).subscribe({
+      next: valasz => {
+        localStorage.setItem('auth-token', valasz.token);
+        this.hiba = '';
+        this.router.navigateByUrl('konyvek');
+      },
+      error: () => {
+        this.hiba = 'Hibás felhasználónév vagy jelszó!';
+      }
+    });
+  }
+
+  logout(): void {
+    localStorage.removeItem('auth-token');
+    this.router.navigateByUrl('login');
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('auth-token') !== null;
+  }
+
+  canActivate(): boolean {
+    if (this.isLoggedIn()) {
+      return true;
+    }
+    this.router.navigateByUrl('login');
+    return false;
+  }
+}
+```
+
+src/app/login/login.component.ts
+
+```
+import { Component } from '@angular/core';
+import { LoginModel } from '../models/login-model';
+import { AuthService } from '../services/auth.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
+})
+export class LoginComponent {
+  loginModel: LoginModel = new LoginModel();
+
+  constructor(public authService: AuthService) {}
+}
+```
+
+src/app/login/login.component.html
+
+```
+<h4>Belépés</h4>
+
+<label for="username" class="form-label">Felhasználónév</label>
+<input type="text" id="username" name="username" class="form-control mb-2" [(ngModel)]="loginModel.username">
+
+<label for="password" class="form-label">Jelszó</label>
+<input type="password" id="password" name="password" class="form-control mb-2" [(ngModel)]="loginModel.password">
+
+<button type="button" class="btn btn-success" (click)="authService.login(loginModel)">Belépés</button>
+
+<div class="alert alert-danger mt-3" *ngIf="authService.hiba">{{ authService.hiba }}</div>
+```
+
+src/app/app-routing.module.ts
 
 ```
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FooldalComponent } from './fooldal/fooldal.component';
-import { ScifiComponent } from './scifi/scifi.component';
-import { HumorComponent } from './humor/humor.component';
+import { KonyvekComponent } from './konyvek/konyvek.component';
+import { UjKonyvComponent } from './uj-konyv/uj-konyv.component';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
-  { path: '', component: FooldalComponent },
-  { path: 'scifi', component: ScifiComponent },
-  { path: 'humor', component: HumorComponent },
+  { path: 'konyvek', component: KonyvekComponent },
+  { path: 'uj-konyv', component: UjKonyvComponent, canActivate: [AuthService] },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
@@ -22,34 +223,53 @@ const routes: Routes = [
 export class AppRoutingModule { }
 ```
 
-src/app/fooldal/fooldal.component.html
+src/app/app.module.ts
 
 ```
-<p>Üdvözöljük az antikváriumban! Könyvbemutatót szervezünk, ahol régi és új kedvenceinket mutatjuk be a látogatóknak.</p>
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { KonyvekComponent } from './konyvek/konyvek.component';
+import { UjKonyvComponent } from './uj-konyv/uj-konyv.component';
+import { LoginComponent } from './login/login.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    KonyvekComponent,
+    UjKonyvComponent,
+    LoginComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 ```
 
-src/app/scifi/scifi.component.html
+src/app/app.component.ts
 
 ```
-<ul>
-  <li>Dűne</li>
-  <li>Alapítvány</li>
-  <li>A Marsi</li>
-  <li>Neuromancer</li>
-  <li>2001: Űrodisszeia</li>
-</ul>
-```
+import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
-src/app/humor/humor.component.html
-
-```
-<table class="table">
-  <tr><th>Cím</th><th>Szerző</th></tr>
-  <tr><td>Galaxis útikalauz stopposoknak</td><td>Douglas Adams</td></tr>
-  <tr><td>Svejk</td><td>Jaroslav Hašek</td></tr>
-  <tr><td>Három ember egy csónakban</td><td>Jerome K. Jerome</td></tr>
-  <tr><td>Micimackó</td><td>A. A. Milne</td></tr>
-</table>
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+  constructor(public authService: AuthService) {}
+}
 ```
 
 src/app/app.component.html
@@ -59,13 +279,16 @@ src/app/app.component.html
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/">Főoldal</a>
+        <a class="nav-link" routerLink="/konyvek">Könyvek</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/scifi">Sci-Fi</a>
+      <li class="nav-item" *ngIf="authService.isLoggedIn()">
+        <a class="nav-link" routerLink="/uj-konyv">Új könyv</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/humor">Humor</a>
+      <li class="nav-item" *ngIf="authService.isLoggedIn()">
+        <a class="nav-link" style="cursor: pointer;" (click)="authService.logout()">Logout</a>
+      </li>
+      <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+        <a class="nav-link" routerLink="/login">Login</a>
       </li>
     </ul>
   </div>
@@ -74,102 +297,4 @@ src/app/app.component.html
 <div class="container mt-3">
   <router-outlet></router-outlet>
 </div>
-```
-
-src/app/app.module.ts
-
-```
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FooldalComponent } from './fooldal/fooldal.component';
-import { ScifiComponent } from './scifi/scifi.component';
-import { HumorComponent } from './humor/humor.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    FooldalComponent,
-    ScifiComponent,
-    HumorComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-4 src/app/konyvajanlo/konyvajanlo.component.ts
-
-```
-import { Component, Input } from '@angular/core';
-
-@Component({
-  selector: 'app-konyvajanlo',
-  templateUrl: './konyvajanlo.component.html',
-  styleUrl: './konyvajanlo.component.scss'
-})
-export class KonyvajanloComponent {
-  @Input() nev: string = '';
-  @Input() ar: number = 0;
-  @Input() akcio: boolean = false;
-}
-```
-
-src/app/konyvajanlo/konyvajanlo.component.html
-
-```
-<h3>{{ nev }}</h3>
-<p [class.akcio]="akcio">{{ ar }} Ft</p>
-```
-
-src/app/konyvajanlo/konyvajanlo.component.scss
-
-```
-@use '../colors';
-
-.akcio {
-  font-weight: bold;
-  font-size: 1.5em;
-  color: colors.$kiemeles;
-}
-```
-
-src/app/app.component.html
-
-```
-<app-konyvajanlo nev="A Gyűrű Szövetsége" [ar]="2500"></app-konyvajanlo>
-<app-konyvajanlo nev="A Két Torony" [ar]="2000"></app-konyvajanlo>
-<app-konyvajanlo nev="A Király Visszatér" [ar]="999" [akcio]="true"></app-konyvajanlo>
-```
-
-src/app/app.module.ts
-
-```
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { KonyvajanloComponent } from './konyvajanlo/konyvajanlo.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    KonyvajanloComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
 ```
