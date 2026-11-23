@@ -1,6 +1,6 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
-src/app/app.routes.ts
+3 src/app/app.routes.ts
 
 ```
 import { Routes } from '@angular/router';
@@ -60,7 +60,48 @@ src/app/humor/humor.component.html
 </table>
 ```
 
-src/app/konyvajanlo/konyvajanlo.component.ts
+src/app/app.component.ts
+
+```
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+}
+```
+
+src/app/app.component.html
+
+```
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/">Főoldal</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/scifi">Sci-Fi</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/humor">Humor</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-3">
+  <router-outlet />
+</div>
+```
+
+4 src/app/konyvajanlo/konyvajanlo.component.ts
 
 ```
 import { Component, Input } from '@angular/core';
@@ -101,13 +142,13 @@ src/app/app.component.ts
 
 ```
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { KonyvajanloComponent } from './konyvajanlo/konyvajanlo.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, KonyvajanloComponent],
+  imports: [RouterOutlet, KonyvajanloComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -118,27 +159,7 @@ export class AppComponent {
 src/app/app.component.html
 
 ```
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-  <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">Főoldal</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/scifi">Sci-Fi</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/humor">Humor</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<div class="container mt-3">
-  <router-outlet />
-
-  <app-konyvajanlo nev="A Gyűrű Szövetsége" [ar]="2500"></app-konyvajanlo>
-  <app-konyvajanlo nev="A Két Torony" [ar]="2000"></app-konyvajanlo>
-  <app-konyvajanlo nev="A Király Visszatér" [ar]="999" [akcio]="true"></app-konyvajanlo>
-</div>
+<app-konyvajanlo nev="A Gyűrű Szövetsége" [ar]="2500"></app-konyvajanlo>
+<app-konyvajanlo nev="A Két Torony" [ar]="2000"></app-konyvajanlo>
+<app-konyvajanlo nev="A Király Visszatér" [ar]="999" [akcio]="true"></app-konyvajanlo>
 ```
