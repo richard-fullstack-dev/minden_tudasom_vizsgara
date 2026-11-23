@@ -1,7 +1,6 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
 ```
-//---------- feladat1/index.html ----------
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -89,8 +88,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+```
 
-//---------- feladat1/style.css ----------
+```
 body {
   background-color: red;
 }
@@ -117,7 +117,6 @@ body {
 ```
 
 ```
-//---------- feladat2/script.js ----------
 const konyvek = [
   { cim: "A Gyűrű Szövetsége", ar: 2500, akcio: false },
   { cim: "A Két Torony", ar: 2000, akcio: false },
