@@ -1,125 +1,181 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
 ```
-//---------- src/app/foglalas.ts ----------
-export class Foglalas {
-  #nev: string;
-  #telefon: string;
+//---------- feladat1/index.html ----------
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antikvárium</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Antikvárium</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Menü">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#konyveink">Könyveink</a></li>
+            <li class="nav-item"><a class="nav-link" href="#kapcsolat">Kapcsolat</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-  constructor(nev: string, telefon: string) {
-    if (nev.trim() === '') {
-      throw new Error('A név nem lehet üres!');
-    }
-    if (telefon.length !== 11) {
-      throw new Error('A telefonszám pontosan 11 karakter legyen!');
-    }
-    this.#nev = nev;
-    this.#telefon = telefon;
-  }
+  <main class="container my-4">
+    <section id="konyveink">
+      <h2>Könyveink</h2>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">A Gyűrű Szövetsége</h5>
+              <p class="card-text">2500 Ft</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">A Két Torony</h5>
+              <p class="card-text">2000 Ft</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">A Király Visszatér <span class="badge bg-danger">AKCIÓ</span></h5>
+              <p class="card-text">999 Ft</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  toString(): string {
-    return `${this.#nev} (${this.#telefon})`;
+    <section id="kapcsolat" class="mt-4">
+      <h2>Kapcsolat</h2>
+      <form>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="nev" class="form-label">Név</label>
+            <input type="text" id="nev" name="nev" class="form-control" autofocus>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="uzenet" class="form-label">Üzenet</label>
+            <textarea id="uzenet" name="uzenet" class="form-control" rows="4"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success">Küldés</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">Antikvárium</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+//---------- feladat1/style.css ----------
+body {
+  background-color: red;
+}
+
+@media (max-width: 992px) {
+  body {
+    background-color: blue;
   }
 }
 
-//---------- src/app/app.component.ts (a meglévő imports-ot bővítsd: FormsModule) ----------
-import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { Foglalas } from './foglalas';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, FormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-})
-export class AppComponent {
-  nev: string = '';
-  telefon: string = '';
-  hiba: string = '';
-  foglalasok: Foglalas[] = [];
-
-  hozzaad(): void {
-    try {
-      this.foglalasok.push(new Foglalas(this.nev, this.telefon));
-      this.nev = '';
-      this.telefon = '';
-      this.hiba = '';
-    } catch (e) {
-      this.hiba = (e as Error).message;
-    }
+@media (max-width: 599px) {
+  body {
+    background-color: green;
   }
 }
 
-//---------- src/app/app.component.html (a vázban lévő űrlapba: [(ngModel)] + (click), alá a lista) ----------
-<div class="container mt-4">
-  <h4>Új foglalás</h4>
-  <label for="nev" class="form-label">Név</label>
-  <input type="text" id="nev" name="nev" class="form-control" [(ngModel)]="nev">
-  <label for="telefon" class="form-label mt-2">Telefon</label>
-  <input type="text" id="telefon" name="telefon" class="form-control" [(ngModel)]="telefon">
-  <button type="button" class="btn btn-primary mt-3" (click)="hozzaad()">Hozzáad</button>
+.card {
+  transition: transform 0.5s;
+}
 
-  @if (hiba) {
-    <div class="alert alert-danger mt-3">{{ hiba }}</div>
-  }
-
-  <ul class="mt-3">
-    @for (f of foglalasok; track $index) {
-      <li>{{ f.toString() }}</li>
-    }
-  </ul>
-</div>
+.card:hover {
+  transform: scale(1.05);
+}
 ```
 
 ```
-//---------- Terminál: Git (a munkamappában, a legelején) ----------
-git init -b main
-git add .
-git commit -m "Kiinduló projekt"
+//---------- feladat2/script.js ----------
+const konyvek = [
+  { cim: "A Gyűrű Szövetsége", ar: 2500, akcio: false },
+  { cim: "A Két Torony", ar: 2000, akcio: false },
+  { cim: "A Király Visszatér", ar: 999, akcio: true },
+  { cim: "Dűne", ar: 3200, akcio: true },
+  { cim: "Alapítvány", ar: 1800, akcio: false },
+];
 
-//---------- Terminál: commit minden feladat után (beszédes üzenet) ----------
-git add .
-git commit -m "Aloldalak és routing elkészítése"
-
-git add .
-git commit -m "Foglalas osztály és űrlap működése"
-
-//---------- Terminál: a 4. feladat külön ágon ----------
-git checkout -b termekajanlo
-git add .
-git commit -m "Termékajánló widget elkészítése"
-git checkout main
-git merge termekajanlo
-
-//---------- Terminál: build ----------
-ng build
-
-//---------- .gitignore (ha nincs benne, ez a sor kell) ----------
-/node_modules
-
-//---------- firebase.json (a projekt gyökerébe; a "kavezo" helyett az angular.json-ben lévő projektnév) ----------
-{
-  "hosting": {
-    "public": "dist/kavezo/browser",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      { "source": "**", "destination": "/index.html" }
-    ]
+function atlagar(lista) {
+  if (lista.length === 0) {
+    return 0;
   }
+  let osszeg = 0;
+  for (const konyv of lista) {
+    osszeg += konyv.ar;
+  }
+  return Math.round(osszeg / lista.length);
 }
 
-//---------- README.md ----------
-# Kávézó alkalmazás
+function legdragabb(lista) {
+  let legdragabbKonyv = lista[0];
+  for (const konyv of lista) {
+    if (konyv.ar > legdragabbKonyv.ar) {
+      legdragabbKonyv = konyv;
+    }
+  }
+  return legdragabbKonyv;
+}
 
-## Build
-Parancs: `ng build`
-Kimeneti mappa: `dist/kavezo/browser`
+function akciosDarab(lista) {
+  return lista.filter(konyv => konyv.akcio).length;
+}
 
-## Publikálás Firebase Hostingra
-1. Bejelentkezés: `firebase login`
-2. Projekt beállítása: `firebase use --add`
-3. Build: `ng build`
-4. Publikálás: `firebase deploy`
+function keres(lista, szoveg) {
+  return lista.filter(konyv => konyv.cim.toLowerCase().includes(szoveg.toLowerCase()));
+}
+
+function rendez(lista) {
+  return [...lista].sort((a, b) => a.ar - b.ar);
+}
+
+function ajandek(lista, osszeg) {
+  let talalat = null;
+  for (const konyv of lista) {
+    if (konyv.ar > osszeg && (talalat === null || konyv.ar < talalat.ar)) {
+      talalat = konyv;
+    }
+  }
+  return talalat;
+}
+
+function betoltes(szoveg) {
+  return JSON.parse(szoveg);
+}
+
+function mentes(lista) {
+  return JSON.stringify(lista);
+}
+
+module.exports = { konyvek, atlagar, legdragabb, akciosDarab, keres, rendez, ajandek, betoltes, mentes };
+```
