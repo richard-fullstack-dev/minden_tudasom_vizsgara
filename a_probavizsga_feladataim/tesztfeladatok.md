@@ -1,5 +1,7 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
+**src/app/konyv.ts**
+
 ```
 export class Konyv {
   #cim: string;
@@ -25,6 +27,8 @@ export class Konyv {
 }
 ```
 
+**src/app/models/login-model.ts**
+
 ```
 export class LoginModel {
   username: string = '';
@@ -32,11 +36,15 @@ export class LoginModel {
 }
 ```
 
+**src/app/models/token-model.ts**
+
 ```
 export class TokenModel {
   token: string = '';
 }
 ```
+
+**src/app/services/auth.service.ts**
 
 ```
 import { HttpClient } from '@angular/common/http';
@@ -86,6 +94,8 @@ export class AuthService {
 }
 ```
 
+**src/app/login/login.component.ts**
+
 ```
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -105,6 +115,8 @@ export class LoginComponent {
 }
 ```
 
+**src/app/login/login.component.html**
+
 ```
 <h4>Belépés</h4>
 
@@ -121,6 +133,8 @@ export class LoginComponent {
 }
 ```
 
+**src/app/app.routes.ts**
+
 ```
 import { Routes } from '@angular/router';
 import { KonyvekComponent } from './konyvek/konyvek.component';
@@ -136,6 +150,8 @@ export const routes: Routes = [
 ];
 ```
 
+**src/app/app.config.ts**
+
 ```
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -146,6 +162,8 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideHttpClient()]
 };
 ```
+
+**src/app/app.component.ts**
 
 ```
 import { Component } from '@angular/core';
@@ -181,6 +199,8 @@ export class AppComponent {
   }
 }
 ```
+
+**src/app/app.component.html**
 
 ```
 <nav class="navbar navbar-expand navbar-dark bg-dark">
