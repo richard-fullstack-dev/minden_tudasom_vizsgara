@@ -1,6 +1,4 @@
-# Próbavizsga 1 – Könyvbemutató (2026.11.23.)
-
-## 3. feladat
+# Otthoni próbafeladatok vizsgafelkészülésre
 
 ```
 //---------- src/app/app.routes.ts ----------
@@ -98,8 +96,6 @@ export class HumorComponent {}
 </table>
 ```
 
-## 4. feladat
-
 ```
 //---------- src/app/konyvajanlo/konyvajanlo.component.ts ----------
 import { Component, Input } from '@angular/core';
@@ -148,8 +144,6 @@ export class AppComponent {}
 <app-konyvajanlo nev="A Két Torony" [ar]="2000"></app-konyvajanlo>
 <app-konyvajanlo nev="A Király Visszatér" [ar]="999" [akcio]="true"></app-konyvajanlo>
 ```
-
-## 5. feladat
 
 ```
 //---------- src/app/konyv.ts ----------
