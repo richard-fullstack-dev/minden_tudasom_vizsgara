@@ -22,7 +22,7 @@ const routes: Routes = [
 export class AppRoutingModule { }
 ```
 
-otthoni gyakorló példafeladat
+# otthoni gyakorló példafeladat
 
 src/app/fooldal/fooldal.component.html
 
@@ -30,7 +30,7 @@ src/app/fooldal/fooldal.component.html
 <p>(a feladat3-tartalom.txt főoldali szövege)</p>
 ```
 
-otthoni gyakorlás feladat
+# otthoni gyakorlás feladat
 
 src/app/kave/kave.component.html
 
@@ -42,7 +42,7 @@ src/app/kave/kave.component.html
 </ul>
 ```
 
-még gyakorlás otthonra
+# még gyakorlás otthonra
 
 src/app/sutik/sutik.component.html
 
@@ -63,7 +63,7 @@ src/app/sutik/sutik.component.html
 </table>
 ```
 
-otthoni gyakorló feladat
+# otthoni gyakorló feladat
 
 src/app/app.component.html
 
@@ -89,7 +89,7 @@ src/app/app.component.html
 </div>
 ```
 
-gyakorlás otthonra
+# gyakorlás otthonra
 
 src/app/app.module.ts
 
@@ -120,7 +120,7 @@ import { SutikComponent } from './sutik/sutik.component';
 export class AppModule { }
 ```
 
-otthoni gyakorló példafeladat
+# otthoni gyakorló példafeladat
 
 4 src/app/termekajanlo/termekajanlo.component.ts
 
@@ -139,7 +139,7 @@ export class TermekajanloComponent {
 }
 ```
 
-otthoni gyakorlás feladat
+# otthoni gyakorlás feladat
 
 src/app/termekajanlo/termekajanlo.component.html
 
@@ -148,7 +148,7 @@ src/app/termekajanlo/termekajanlo.component.html
 <p [ngClass]="{ akcio: akcio }">{{ ar }} Ft</p>
 ```
 
-még gyakorlás otthonra
+# még gyakorlás otthonra
 
 src/app/termekajanlo/termekajanlo.component.scss
 
@@ -162,7 +162,7 @@ src/app/termekajanlo/termekajanlo.component.scss
 }
 ```
 
-otthoni gyakorló feladat
+# otthoni gyakorló feladat
 
 src/app/app.component.html
 
@@ -172,7 +172,7 @@ src/app/app.component.html
 <app-termekajanlo nev="Flat white" [ar]="850" [akcio]="true"></app-termekajanlo>
 ```
 
-gyakorlás otthonra
+# gyakorlás otthonra
 
 src/app/app.module.ts
 
@@ -199,7 +199,7 @@ import { TermekajanloComponent } from './termekajanlo/termekajanlo.component';
 export class AppModule { }
 ```
 
-otthoni gyakorló példafeladat
+# otthoni gyakorló példafeladat
 
 5 src/app/konyv.ts
 
@@ -228,7 +228,7 @@ export class Konyv {
 }
 ```
 
-otthoni gyakorlás feladat
+# otthoni gyakorlás feladat
 
 src/app/app.module.ts
 
@@ -255,7 +255,7 @@ import { AppComponent } from './app.component';
 export class AppModule { }
 ```
 
-még gyakorlás otthonra
+# még gyakorlás otthonra
 
 src/app/app.component.ts
 
@@ -284,7 +284,7 @@ export class AppComponent {
 }
 ```
 
-otthoni gyakorló feladat
+# otthoni gyakorló feladat
 
 src/app/app.component.html
 
@@ -305,7 +305,7 @@ src/app/app.component.html
 </div>
 ```
 
-gyakorlás otthonra
+# gyakorlás otthonra
 
 6 src/app/models/login-model.ts
 
@@ -316,7 +316,7 @@ export class LoginModel {
 }
 ```
 
-otthoni gyakorló példafeladat
+# otthoni gyakorló példafeladat
 
 src/app/models/token-model.ts
 
@@ -326,7 +326,7 @@ export class TokenModel {
 }
 ```
 
-otthoni gyakorlás feladat
+# otthoni gyakorlás feladat
 
 src/app/services/auth.service.ts
 
@@ -378,7 +378,7 @@ export class AuthService {
 }
 ```
 
-még gyakorlás otthonra
+# még gyakorlás otthonra
 
 src/app/login/login.component.ts
 
@@ -399,7 +399,7 @@ export class LoginComponent {
 }
 ```
 
-otthoni gyakorló feladat
+# otthoni gyakorló feladat
 
 src/app/login/login.component.html
 
@@ -417,7 +417,7 @@ src/app/login/login.component.html
 <div class="alert alert-danger mt-3" *ngIf="authService.hiba">{{ authService.hiba }}</div>
 ```
 
-gyakorlás otthonra
+# gyakorlás otthonra
 
 src/app/app-routing.module.ts
 
@@ -442,7 +442,7 @@ const routes: Routes = [
 export class AppRoutingModule { }
 ```
 
-otthoni gyakorló példafeladat
+# otthoni gyakorló példafeladat
 
 src/app/app.module.ts
 
@@ -477,7 +477,7 @@ import { LoginComponent } from './login/login.component';
 export class AppModule { }
 ```
 
-otthoni gyakorlás feladat
+# otthoni gyakorlás feladat
 
 src/app/app.component.ts
 
@@ -495,7 +495,7 @@ export class AppComponent {
 }
 ```
 
-még gyakorlás otthonra
+# még gyakorlás otthonra
 
 src/app/app.component.html
 
@@ -524,7 +524,7 @@ src/app/app.component.html
 </div>
 ```
 
-otthoni gyakorló feladat
+# otthoni gyakorló feladat
 
 8 src/app/app-routing.module.ts
 
@@ -546,7 +546,7 @@ const routes: Routes = [
 export class AppRoutingModule { }
 ```
 
-gyakorlás otthonra
+# gyakorlás otthonra
 
 src/app/fooldal/fooldal.component.html
 
@@ -554,7 +554,7 @@ src/app/fooldal/fooldal.component.html
 <p>Üdvözöljük a mozi oldalán!</p>
 ```
 
-otthoni gyakorló példafeladat
+# otthoni gyakorló példafeladat
 
 src/app/app.component.html
 
@@ -577,7 +577,7 @@ src/app/app.component.html
 </div>
 ```
 
-otthoni gyakorlás feladat
+# otthoni gyakorlás feladat
 
 src/app/filmkartya/filmkartya.component.ts
 
@@ -596,7 +596,7 @@ export class FilmkartyaComponent {
 }
 ```
 
-még gyakorlás otthonra
+# még gyakorlás otthonra
 
 src/app/filmkartya/filmkartya.component.html
 
@@ -605,7 +605,7 @@ src/app/filmkartya/filmkartya.component.html
 <p [class.ujdonsag]="ujdonsag">{{ ev }}</p>
 ```
 
-otthoni gyakorló feladat
+# otthoni gyakorló feladat
 
 src/app/filmkartya/filmkartya.component.scss
 
@@ -616,7 +616,7 @@ src/app/filmkartya/filmkartya.component.scss
 }
 ```
 
-gyakorlás otthonra
+# gyakorlás otthonra
 
 src/app/film.ts
 
@@ -650,7 +650,7 @@ export class Film {
 }
 ```
 
-otthoni gyakorló példafeladat
+# otthoni gyakorló példafeladat
 
 src/app/filmek/filmek.component.ts
 
@@ -679,7 +679,7 @@ export class FilmekComponent {
 }
 ```
 
-otthoni gyakorlás feladat
+# otthoni gyakorlás feladat
 
 src/app/filmek/filmek.component.html
 
@@ -698,7 +698,7 @@ src/app/filmek/filmek.component.html
 </div>
 ```
 
-még gyakorlás otthonra
+# még gyakorlás otthonra
 
 src/app/app.module.ts
 
