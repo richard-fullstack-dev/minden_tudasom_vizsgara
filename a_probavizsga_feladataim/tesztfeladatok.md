@@ -1,205 +1,210 @@
 # Otthoni saját próbafeladatok vizsgafelkészülésre
 
-3 src/app/app-routing.module.ts
+1 index.html
 
 ```
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { FooldalComponent } from './fooldal/fooldal.component';
-import { KaveComponent } from './kave/kave.component';
-import { SutikComponent } from './sutik/sutik.component';
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antikvárium</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Antikvárium</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#konyveink">Könyveink</a></li>
+            <li class="nav-item"><a class="nav-link" href="#kapcsolat">Kapcsolat</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-const routes: Routes = [
-  { path: '', component: FooldalComponent },
-  { path: 'kave', component: KaveComponent },
-  { path: 'sutik', component: SutikComponent },
+  <main class="container my-4">
+    <section id="konyveink">
+      <h2>Könyveink</h2>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5>A Gyűrű Szövetsége</h5>
+              <p>2500 Ft</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5>A Két Torony</h5>
+              <p>2000 Ft</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5>A Király Visszatér <span class="badge bg-danger">AKCIÓ</span></h5>
+              <p>999 Ft</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kapcsolat">
+      <h2>Kapcsolat</h2>
+      <form>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="nev" class="form-label">Név</label>
+            <input type="text" id="nev" class="form-control" autofocus>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="uzenet" class="form-label">Üzenet</label>
+            <textarea id="uzenet" class="form-control"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success">Küldés</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white text-center p-3">
+    Antikvárium
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+```
+
+# Otthoni gyakorló példafeladat
+
+style.css
+
+```
+body {
+  background-color: red;
+}
+
+@media (max-width: 992px) {
+  body {
+    background-color: blue;
+  }
+}
+
+@media (max-width: 599px) {
+  body {
+    background-color: green;
+  }
+}
+
+.card {
+  transition: transform 0.5s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+```
+
+# Otthoni gyakorlás feladat
+
+2 script.js
+
+```
+const konyvek = [
+  { cim: "A Gyűrű Szövetsége", ar: 2500, akcio: false },
+  { cim: "A Két Torony", ar: 2000, akcio: false },
+  { cim: "A Király Visszatér", ar: 999, akcio: true },
+  { cim: "Dűne", ar: 3200, akcio: true },
+  { cim: "Alapítvány", ar: 1800, akcio: false }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
-```
+function atlagar(lista) {
+  let osszeg = 0;
+  for (let i = 0; i < lista.length; i++) {
+    osszeg += lista[i].ar;
+  }
+  return Math.round(osszeg / lista.length);
+}
 
-# Otthoni gyakorló példafeladat
+function legdragabb(lista) {
+  let max = lista[0];
+  for (let i = 1; i < lista.length; i++) {
+    if (lista[i].ar > max.ar) {
+      max = lista[i];
+    }
+  }
+  return max;
+}
 
-src/app/fooldal/fooldal.component.html
+function akciosDarab(lista) {
+  let db = 0;
+  for (let i = 0; i < lista.length; i++) {
+    if (lista[i].akcio) {
+      db++;
+    }
+  }
+  return db;
+}
 
-```
-<p>(a feladat3-tartalom.txt főoldali szövege)</p>
-```
+function keres(lista, szoveg) {
+  const eredmeny = [];
+  for (let i = 0; i < lista.length; i++) {
+    if (lista[i].cim.toLowerCase().includes(szoveg.toLowerCase())) {
+      eredmeny.push(lista[i]);
+    }
+  }
+  return eredmeny;
+}
 
-# Otthoni gyakorlás feladat
+function rendez(lista) {
+  const masolat = lista.slice();
+  masolat.sort(function (a, b) {
+    return a.ar - b.ar;
+  });
+  return masolat;
+}
 
-src/app/kave/kave.component.html
+function ajandek(lista, osszeg) {
+  let talalat = null;
+  for (let i = 0; i < lista.length; i++) {
+    if (lista[i].ar > osszeg) {
+      if (talalat === null || lista[i].ar < talalat.ar) {
+        talalat = lista[i];
+      }
+    }
+  }
+  return talalat;
+}
 
-```
-<ul>
-  <li>(a feladat3-tartalom.txt kávék listájának 1. sora)</li>
-  <li>(a feladat3-tartalom.txt kávék listájának 2. sora)</li>
-  <li>(a feladat3-tartalom.txt kávék listájának 3. sora)</li>
-</ul>
+function betoltes(szoveg) {
+  return JSON.parse(szoveg);
+}
+
+function mentes(lista) {
+  return JSON.stringify(lista);
+}
+
+module.exports = { konyvek, atlagar, legdragabb, akciosDarab, keres, rendez, ajandek, betoltes, mentes };
 ```
 
 # Még gyakorlás otthonra
-
-src/app/sutik/sutik.component.html
-
-```
-<table class="table">
-  <tr>
-    <th>(a feladat3-tartalom.txt sütik táblázatának 1. oszlopcíme)</th>
-    <th>(a feladat3-tartalom.txt sütik táblázatának 2. oszlopcíme)</th>
-  </tr>
-  <tr>
-    <td>(1. sor 1. adat)</td>
-    <td>(1. sor 2. adat)</td>
-  </tr>
-  <tr>
-    <td>(2. sor 1. adat)</td>
-    <td>(2. sor 2. adat)</td>
-  </tr>
-</table>
-```
-
-# Otthoni gyakorló feladat
-
-src/app/app.component.html
-
-```
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-  <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">Főoldal</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/kave">Kávék</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/sutik">Sütik</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<div class="container mt-3">
-  <router-outlet></router-outlet>
-</div>
-```
-
-# Gyakorlás otthonra
-
-src/app/app.module.ts
-
-```
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FooldalComponent } from './fooldal/fooldal.component';
-import { KaveComponent } from './kave/kave.component';
-import { SutikComponent } from './sutik/sutik.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    FooldalComponent,
-    KaveComponent,
-    SutikComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-# Otthoni gyakorló példafeladat
-
-4 src/app/termekajanlo/termekajanlo.component.ts
-
-```
-import { Component, Input } from '@angular/core';
-
-@Component({
-  selector: 'app-termekajanlo',
-  templateUrl: './termekajanlo.component.html',
-  styleUrl: './termekajanlo.component.scss'
-})
-export class TermekajanloComponent {
-  @Input() nev: string = '';
-  @Input() ar: number = 0;
-  @Input() akcio: boolean = false;
-}
-```
-
-# Otthoni gyakorlás feladat
-
-src/app/termekajanlo/termekajanlo.component.html
-
-```
-<h3>{{ nev }}</h3>
-<p [ngClass]="{ akcio: akcio }">{{ ar }} Ft</p>
-```
-
-# Még gyakorlás otthonra
-
-src/app/termekajanlo/termekajanlo.component.scss
-
-```
-@import '../colors';
-
-.akcio {
-  font-weight: bold;
-  font-size: 1.5em;
-  color: $kiemeles;
-}
-```
-
-# Otthoni gyakorló feladat
-
-src/app/app.component.html
-
-```
-<app-termekajanlo nev="Espresso" [ar]="700"></app-termekajanlo>
-<app-termekajanlo nev="Latte" [ar]="900"></app-termekajanlo>
-<app-termekajanlo nev="Flat white" [ar]="850" [akcio]="true"></app-termekajanlo>
-```
-
-# Gyakorlás otthonra
-
-src/app/app.module.ts
-
-```
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { TermekajanloComponent } from './termekajanlo/termekajanlo.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    TermekajanloComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-# Otthoni gyakorló példafeladat
 
 5 src/app/konyv.ts
 
@@ -228,7 +233,7 @@ export class Konyv {
 }
 ```
 
-# Otthoni gyakorlás feladat
+# Otthoni gyakorló feladat
 
 src/app/app.module.ts
 
@@ -255,7 +260,7 @@ import { AppComponent } from './app.component';
 export class AppModule { }
 ```
 
-# Még gyakorlás otthonra
+# Gyakorlás otthonra
 
 src/app/app.component.ts
 
@@ -284,7 +289,7 @@ export class AppComponent {
 }
 ```
 
-# Otthoni gyakorló feladat
+# Otthoni gyakorló példafeladat
 
 src/app/app.component.html
 
@@ -305,7 +310,7 @@ src/app/app.component.html
 </div>
 ```
 
-# Gyakorlás otthonra
+# Otthoni gyakorlás feladat
 
 6 src/app/models/login-model.ts
 
@@ -316,7 +321,7 @@ export class LoginModel {
 }
 ```
 
-# Otthoni gyakorló példafeladat
+# Még gyakorlás otthonra
 
 src/app/models/token-model.ts
 
@@ -326,7 +331,7 @@ export class TokenModel {
 }
 ```
 
-# Otthoni gyakorlás feladat
+# Otthoni gyakorló feladat
 
 src/app/services/auth.service.ts
 
@@ -378,7 +383,7 @@ export class AuthService {
 }
 ```
 
-# Még gyakorlás otthonra
+# Gyakorlás otthonra
 
 src/app/login/login.component.ts
 
@@ -399,7 +404,7 @@ export class LoginComponent {
 }
 ```
 
-# Otthoni gyakorló feladat
+# Otthoni gyakorló példafeladat
 
 src/app/login/login.component.html
 
@@ -417,7 +422,7 @@ src/app/login/login.component.html
 <div class="alert alert-danger mt-3" *ngIf="authService.hiba">{{ authService.hiba }}</div>
 ```
 
-# Gyakorlás otthonra
+# Otthoni gyakorlás feladat
 
 src/app/app-routing.module.ts
 
@@ -442,7 +447,7 @@ const routes: Routes = [
 export class AppRoutingModule { }
 ```
 
-# Otthoni gyakorló példafeladat
+# Még gyakorlás otthonra
 
 src/app/app.module.ts
 
@@ -477,7 +482,7 @@ import { LoginComponent } from './login/login.component';
 export class AppModule { }
 ```
 
-# Otthoni gyakorlás feladat
+# Otthoni gyakorló feladat
 
 src/app/app.component.ts
 
@@ -495,7 +500,7 @@ export class AppComponent {
 }
 ```
 
-# Még gyakorlás otthonra
+# Gyakorlás otthonra
 
 src/app/app.component.html
 
@@ -522,211 +527,4 @@ src/app/app.component.html
 <div class="container mt-3">
   <router-outlet></router-outlet>
 </div>
-```
-
-# Otthoni gyakorló feladat
-
-8 src/app/app-routing.module.ts
-
-```
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { FooldalComponent } from './fooldal/fooldal.component';
-import { FilmekComponent } from './filmek/filmek.component';
-
-const routes: Routes = [
-  { path: '', component: FooldalComponent },
-  { path: 'filmek', component: FilmekComponent },
-];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
-```
-
-# Gyakorlás otthonra
-
-src/app/fooldal/fooldal.component.html
-
-```
-<p>Üdvözöljük a mozi oldalán!</p>
-```
-
-# Otthoni gyakorló példafeladat
-
-src/app/app.component.html
-
-```
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-  <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">Főoldal</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/filmek">Filmek</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<div class="container mt-3">
-  <router-outlet></router-outlet>
-</div>
-```
-
-# Otthoni gyakorlás feladat
-
-src/app/filmkartya/filmkartya.component.ts
-
-```
-import { Component, Input } from '@angular/core';
-
-@Component({
-  selector: 'app-filmkartya',
-  templateUrl: './filmkartya.component.html',
-  styleUrl: './filmkartya.component.scss'
-})
-export class FilmkartyaComponent {
-  @Input() cim: string = '';
-  @Input() ev: number = 0;
-  @Input() ujdonsag: boolean = false;
-}
-```
-
-# Még gyakorlás otthonra
-
-src/app/filmkartya/filmkartya.component.html
-
-```
-<h3>{{ cim }}</h3>
-<p [class.ujdonsag]="ujdonsag">{{ ev }}</p>
-```
-
-# Otthoni gyakorló feladat
-
-src/app/filmkartya/filmkartya.component.scss
-
-```
-.ujdonsag {
-  font-weight: bold;
-  color: red;
-}
-```
-
-# Gyakorlás otthonra
-
-src/app/film.ts
-
-```
-export class Film {
-  #cim: string;
-  #ev: number;
-
-  constructor(cim: string, ev: number) {
-    if (cim.trim() === '') {
-      throw new Error('A cím nem lehet üres!');
-    }
-    if (Math.floor(ev) !== ev || ev < 1900 || ev > 2100) {
-      throw new Error('Az év 1900 és 2100 közötti egész szám lehet!');
-    }
-    this.#cim = cim;
-    this.#ev = ev;
-  }
-
-  getCim(): string {
-    return this.#cim;
-  }
-
-  getEv(): number {
-    return this.#ev;
-  }
-
-  toString(): string {
-    return `${this.#cim} (${this.#ev})`;
-  }
-}
-```
-
-# Otthoni gyakorló példafeladat
-
-src/app/filmek/filmek.component.ts
-
-```
-import { Component } from '@angular/core';
-import { Film } from '../film';
-
-@Component({
-  selector: 'app-filmek',
-  templateUrl: './filmek.component.html',
-  styleUrl: './filmek.component.scss'
-})
-export class FilmekComponent {
-  cim: string = '';
-  ev: number | null = null;
-  filmek: Film[] = [];
-
-  hozzaad(): void {
-    try {
-      this.filmek.push(new Film(this.cim, Number(this.ev)));
-      this.cim = '';
-      this.ev = null;
-    } catch (error) {
-    }
-  }
-}
-```
-
-# Otthoni gyakorlás feladat
-
-src/app/filmek/filmek.component.html
-
-```
-<h4>Új film</h4>
-<form>
-  <label for="cim" class="form-label">Cím</label>
-  <input type="text" id="cim" name="cim" class="form-control" [(ngModel)]="cim">
-  <label for="ev" class="form-label mt-2">Év</label>
-  <input type="number" id="ev" name="ev" class="form-control" [(ngModel)]="ev">
-  <button type="button" class="btn btn-primary mt-3" (click)="hozzaad()">Hozzáadás</button>
-</form>
-
-<div class="mt-3">
-  <app-filmkartya *ngFor="let f of filmek" [cim]="f.getCim()" [ev]="f.getEv()"></app-filmkartya>
-</div>
-```
-
-# Még gyakorlás otthonra
-
-src/app/app.module.ts
-
-```
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FooldalComponent } from './fooldal/fooldal.component';
-import { FilmekComponent } from './filmek/filmek.component';
-import { FilmkartyaComponent } from './filmkartya/filmkartya.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    FooldalComponent,
-    FilmekComponent,
-    FilmkartyaComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
 ```
